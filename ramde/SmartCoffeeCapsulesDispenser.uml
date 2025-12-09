@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Blocks="http://www.eclipse.org/papyrus/sysml/1.6/SysML/Blocks" xmlns:PortsAndFlows="http://www.eclipse.org/papyrus/sysml/1.6/SysML/PortsAndFlows" xmlns:Requirements="http://www.eclipse.org/papyrus/sysml/1.6/SysML/Requirements" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xsi:schemaLocation="http://www.eclipse.org/papyrus/sysml/1.6/SysML/Blocks http://www.eclipse.org/papyrus/sysml/1.6/SysML#//blocks http://www.eclipse.org/papyrus/sysml/1.6/SysML/PortsAndFlows http://www.eclipse.org/papyrus/sysml/1.6/SysML#//portsandflows http://www.eclipse.org/papyrus/sysml/1.6/SysML/Requirements http://www.eclipse.org/papyrus/sysml/1.6/SysML#//requirements">
+  <uml:Model xmi:id="_s30owNVBEfCYZcqbPlE1Ng" name="SmartCoffeeCapsulesDispenser">
+    <packageImport xmi:type="uml:PackageImport" xmi:id="_s5DX1tVBEfCYZcqbPlE1Ng">
+      <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
+    </packageImport>
+    <packageImport xmi:type="uml:PackageImport" xmi:id="_s5El8NVBEfCYZcqbPlE1Ng">
+      <importedPackage xmi:type="uml:Package" href="pathmap://SysML16_LIBRARIES/SysML-Standard-Library.uml#SysML.package_packagedElement_Libraries"/>
+    </packageImport>
+    <packagedElement xmi:type="uml:Package" xmi:id="_vC1HwNVBEfCYZcqbPlE1Ng" name="1 Problem">
+      <packagedElement xmi:type="uml:Package" xmi:id="_wMF14NVBEfCYZcqbPlE1Ng" name="1 Black Box">
+        <packagedElement xmi:type="uml:Package" xmi:id="_ERHDYNVCEfCYZcqbPlE1Ng" name="1 Requirements">
+          <packagedElement xmi:type="uml:Package" xmi:id="_D51EcNVFEfCYZcqbPlE1Ng" name="1 Funtional Requirements">
+            <packagedElement xmi:type="uml:Class" xmi:id="_j6nLQNVDEfCYZcqbPlE1Ng" name="User Login"/>
+            <packagedElement xmi:type="uml:Class" xmi:id="_kyeAUNVDEfCYZcqbPlE1Ng" name="Flavor Selection"/>
+            <packagedElement xmi:type="uml:Class" xmi:id="_lpRsgNVDEfCYZcqbPlE1Ng" name="Register Selection"/>
+            <packagedElement xmi:type="uml:Class" xmi:id="_mZ9ikNVDEfCYZcqbPlE1Ng" name="Detect Capsule Presence"/>
+            <packagedElement xmi:type="uml:Class" xmi:id="_nAQGgNVDEfCYZcqbPlE1Ng" name="Calculate Remaining Capsules"/>
+            <packagedElement xmi:type="uml:Class" xmi:id="_nsdsQNVDEfCYZcqbPlE1Ng" name="Warn Low Stock"/>
+            <packagedElement xmi:type="uml:Class" xmi:id="_ooOw8NVDEfCYZcqbPlE1Ng" name="Refill Notification"/>
+            <packagedElement xmi:type="uml:Class" xmi:id="_pfX0UNVDEfCYZcqbPlE1Ng" name="MQTT Data Transmission"/>
+            <packagedElement xmi:type="uml:Class" xmi:id="_rh8wENVDEfCYZcqbPlE1Ng" name="Dispensing Mechanism"/>
+            <packagedElement xmi:type="uml:Class" xmi:id="_sHcCwNVDEfCYZcqbPlE1Ng" name="Redundant Monitoring"/>
+            <packagedElement xmi:type="uml:Dependency" xmi:id="_l7iPQNVFEfCYZcqbPlE1Ng" name="Login required before flavor selection" client="_j6nLQNVDEfCYZcqbPlE1Ng" supplier="_kyeAUNVDEfCYZcqbPlE1Ng"/>
+            <packagedElement xmi:type="uml:Dependency" xmi:id="_pIsu0NVFEfCYZcqbPlE1Ng" name="Selection required before server registration" client="_kyeAUNVDEfCYZcqbPlE1Ng" supplier="_lpRsgNVDEfCYZcqbPlE1Ng"/>
+            <packagedElement xmi:type="uml:Dependency" xmi:id="_rB5sINVFEfCYZcqbPlE1Ng" name="Capsule detection enables capsule counting" client="_mZ9ikNVDEfCYZcqbPlE1Ng" supplier="_nAQGgNVDEfCYZcqbPlE1Ng"/>
+            <packagedElement xmi:type="uml:Dependency" xmi:id="_tLnxsNVFEfCYZcqbPlE1Ng" name="Stock count needed for low-stock warning" client="_nAQGgNVDEfCYZcqbPlE1Ng" supplier="_nsdsQNVDEfCYZcqbPlE1Ng"/>
+            <packagedElement xmi:type="uml:Dependency" xmi:id="_vD5h8NVFEfCYZcqbPlE1Ng" name="Accurate count must be available for safe dispensing" client="_nAQGgNVDEfCYZcqbPlE1Ng" supplier="_rh8wENVDEfCYZcqbPlE1Ng"/>
+            <packagedElement xmi:type="uml:Dependency" xmi:id="_x4wPMNVFEfCYZcqbPlE1Ng" name="Redundancy supports safety requirements" client="_sHcCwNVDEfCYZcqbPlE1Ng" supplier="_4GU2oNVDEfCYZcqbPlE1Ng"/>
+            <packagedElement xmi:type="uml:Dependency" xmi:id="_zn9jANVFEfCYZcqbPlE1Ng" name="Redundancy supports safety requirements" client="_sHcCwNVDEfCYZcqbPlE1Ng" supplier="_4v2UwNVDEfCYZcqbPlE1Ng"/>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Package" xmi:id="_GYOZgNVFEfCYZcqbPlE1Ng" name="2 Safety and Quality Requirements">
+            <packagedElement xmi:type="uml:Class" xmi:id="_4GU2oNVDEfCYZcqbPlE1Ng" name="Sensor Reliability"/>
+            <packagedElement xmi:type="uml:Class" xmi:id="_4v2UwNVDEfCYZcqbPlE1Ng" name="Fault Detection"/>
+            <packagedElement xmi:type="uml:Class" xmi:id="_5gRFENVDEfCYZcqbPlE1Ng" name="Data Integrity"/>
+            <packagedElement xmi:type="uml:Class" xmi:id="_6UQGwNVDEfCYZcqbPlE1Ng" name="Secure Authentication"/>
+            <packagedElement xmi:type="uml:Class" xmi:id="_6-60YNVDEfCYZcqbPlE1Ng" name="Safe Motor Operation"/>
+          </packagedElement>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Package" xmi:id="_Gxq7oNVCEfCYZcqbPlE1Ng" name="2 Use Cases"/>
+        <packagedElement xmi:type="uml:Package" xmi:id="_IIHxMNVCEfCYZcqbPlE1Ng" name="3 System Context">
+          <packagedElement xmi:type="uml:Class" xmi:id="_Er-LsNVIEfCYZcqbPlE1Ng" name="Smart Coffee Capsules Dispenser ">
+            <ownedAttribute xmi:type="uml:Property" xmi:id="_fE4uQNVKEfCYZcqbPlE1Ng" name="SS1" type="_yBv9sNVGEfCYZcqbPlE1Ng"/>
+            <ownedAttribute xmi:type="uml:Property" xmi:id="_fE6jdtVKEfCYZcqbPlE1Ng" name="SS2" type="_1HkfINVGEfCYZcqbPlE1Ng"/>
+            <ownedAttribute xmi:type="uml:Property" xmi:id="_fE7KiNVKEfCYZcqbPlE1Ng" name="SS3" type="_1mKfoNVGEfCYZcqbPlE1Ng"/>
+            <ownedAttribute xmi:type="uml:Property" xmi:id="_fE7xmNVKEfCYZcqbPlE1Ng" name="SS4" type="_2L1_kNVGEfCYZcqbPlE1Ng"/>
+            <ownedAttribute xmi:type="uml:Property" xmi:id="_fE8YoNVKEfCYZcqbPlE1Ng" name="SS5" type="_2y70wNVGEfCYZcqbPlE1Ng"/>
+            <ownedAttribute xmi:type="uml:Property" xmi:id="_fE8YqdVKEfCYZcqbPlE1Ng" name="SS6" type="_3xhj8NVGEfCYZcqbPlE1Ng"/>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Package" xmi:id="_Oh4WUNVHEfCYZcqbPlE1Ng" name="1 Inside System Blocks">
+            <packagedElement xmi:type="uml:Class" xmi:id="_yBv9sNVGEfCYZcqbPlE1Ng" name="User Interface Subsystem"/>
+            <packagedElement xmi:type="uml:Class" xmi:id="_1HkfINVGEfCYZcqbPlE1Ng" name="Sensing Subsystem"/>
+            <packagedElement xmi:type="uml:Class" xmi:id="_1mKfoNVGEfCYZcqbPlE1Ng" name="Actuation Subsystem"/>
+            <packagedElement xmi:type="uml:Class" xmi:id="_2L1_kNVGEfCYZcqbPlE1Ng" name="Communication Subsystem"/>
+            <packagedElement xmi:type="uml:Class" xmi:id="_2y70wNVGEfCYZcqbPlE1Ng" name="Safety &amp; Diagnostics Subsystem"/>
+            <packagedElement xmi:type="uml:Class" xmi:id="_3xhj8NVGEfCYZcqbPlE1Ng" name="Control Subsystem (Main MCU)"/>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Package" xmi:id="_TyoeQNVHEfCYZcqbPlE1Ng" name="2 Outside System">
+            <packagedElement xmi:type="uml:Actor" xmi:id="_X52LQNVHEfCYZcqbPlE1Ng" name="User (NFC card)"/>
+            <packagedElement xmi:type="uml:Actor" xmi:id="_ZaA9gNVHEfCYZcqbPlE1Ng" name="WWW Server"/>
+            <packagedElement xmi:type="uml:Actor" xmi:id="_airOsNVHEfCYZcqbPlE1Ng" name="MQTT Central Server"/>
+            <packagedElement xmi:type="uml:Actor" xmi:id="_ciGv0NVHEfCYZcqbPlE1Ng" name="Maintenance Operator"/>
+            <packagedElement xmi:type="uml:Class" xmi:id="_mPHAoNVHEfCYZcqbPlE1Ng" name="Power Supply"/>
+          </packagedElement>
+          <packagedElement xmi:type="uml:InformationFlow" xmi:id="_UwKgsNVLEfCYZcqbPlE1Ng" name="User ID, flavor selection" informationSource="_fE4uQNVKEfCYZcqbPlE1Ng" informationTarget="_fE8YqdVKEfCYZcqbPlE1Ng"/>
+          <packagedElement xmi:type="uml:InformationFlow" xmi:id="_hFISQNVLEfCYZcqbPlE1Ng" name="Feedback, prompts" informationSource="_fE8YqdVKEfCYZcqbPlE1Ng" informationTarget="_fE4uQNVKEfCYZcqbPlE1Ng"/>
+          <packagedElement xmi:type="uml:InformationFlow" xmi:id="_mzMBQNVLEfCYZcqbPlE1Ng" name="Capsule presence, level, refill event" informationSource="_fE6jdtVKEfCYZcqbPlE1Ng" informationTarget="_fE8YqdVKEfCYZcqbPlE1Ng"/>
+          <packagedElement xmi:type="uml:InformationFlow" xmi:id="_nRKWsNVLEfCYZcqbPlE1Ng" name="Sensor polling commands" informationSource="_fE8YqdVKEfCYZcqbPlE1Ng" informationTarget="_fE6jdtVKEfCYZcqbPlE1Ng"/>
+          <packagedElement xmi:type="uml:InformationFlow" xmi:id="_rGIdINVLEfCYZcqbPlE1Ng" name="Servo commands (dispense, reset)" informationSource="_fE8YqdVKEfCYZcqbPlE1Ng" informationTarget="_fE7KiNVKEfCYZcqbPlE1Ng"/>
+          <packagedElement xmi:type="uml:InformationFlow" xmi:id="_tWLNINVLEfCYZcqbPlE1Ng" name="Dispense action causes sensor change" informationSource="_fE7KiNVKEfCYZcqbPlE1Ng" informationTarget="_fE6jdtVKEfCYZcqbPlE1Ng"/>
+          <packagedElement xmi:type="uml:InformationFlow" xmi:id="_vt-K8NVLEfCYZcqbPlE1Ng" name="Redundant sensor values" informationSource="_fE6jdtVKEfCYZcqbPlE1Ng" informationTarget="_fE8YoNVKEfCYZcqbPlE1Ng"/>
+          <packagedElement xmi:type="uml:InformationFlow" xmi:id="_xxmPkNVLEfCYZcqbPlE1Ng" name="Fault warning, error state" informationSource="_fE8YoNVKEfCYZcqbPlE1Ng" informationTarget="_fE8YqdVKEfCYZcqbPlE1Ng"/>
+          <packagedElement xmi:type="uml:InformationFlow" xmi:id="_zc23gNVLEfCYZcqbPlE1Ng" name="Data to send to WWW + MQTT" informationSource="_fE8YqdVKEfCYZcqbPlE1Ng" informationTarget="_fE7xmNVKEfCYZcqbPlE1Ng"/>
+          <packagedElement xmi:type="uml:InformationFlow" xmi:id="_21rNcNVLEfCYZcqbPlE1Ng" name="Error reports" informationSource="_fE8YoNVKEfCYZcqbPlE1Ng" informationTarget="_fE7xmNVKEfCYZcqbPlE1Ng"/>
+          <packagedElement xmi:type="uml:Dependency" xmi:id="_Pu80INVMEfCYZcqbPlE1Ng" name="Power" client="_Er-LsNVIEfCYZcqbPlE1Ng" supplier="_mPHAoNVHEfCYZcqbPlE1Ng"/>
+          <packagedElement xmi:type="uml:Association" xmi:id="_dYM4ENVMEfCYZcqbPlE1Ng" memberEnd="_dYOGMdVMEfCYZcqbPlE1Ng _dYOtQdVMEfCYZcqbPlE1Ng" navigableOwnedEnd="_dYOGMdVMEfCYZcqbPlE1Ng">
+            <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_dYNfINVMEfCYZcqbPlE1Ng" source="org.eclipse.papyrus">
+              <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_dYOGMNVMEfCYZcqbPlE1Ng" key="nature" value="UML_Nature"/>
+            </eAnnotations>
+            <ownedEnd xmi:type="uml:Property" xmi:id="_dYOGMdVMEfCYZcqbPlE1Ng" name="smart coffee capsules dispenser " type="_Er-LsNVIEfCYZcqbPlE1Ng" association="_dYM4ENVMEfCYZcqbPlE1Ng">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_dYOtQNVMEfCYZcqbPlE1Ng" value="*"/>
+            </ownedEnd>
+            <ownedEnd xmi:type="uml:Property" xmi:id="_dYOtQdVMEfCYZcqbPlE1Ng" name="user (nfc card)" type="_X52LQNVHEfCYZcqbPlE1Ng" association="_dYM4ENVMEfCYZcqbPlE1Ng"/>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Association" xmi:id="_eBKVgNVMEfCYZcqbPlE1Ng" memberEnd="_eBKVg9VMEfCYZcqbPlE1Ng _eBK8ktVMEfCYZcqbPlE1Ng" navigableOwnedEnd="_eBKVg9VMEfCYZcqbPlE1Ng">
+            <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_eBKVgdVMEfCYZcqbPlE1Ng" source="org.eclipse.papyrus">
+              <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_eBKVgtVMEfCYZcqbPlE1Ng" key="nature" value="UML_Nature"/>
+            </eAnnotations>
+            <ownedEnd xmi:type="uml:Property" xmi:id="_eBKVg9VMEfCYZcqbPlE1Ng" name="smart coffee capsules dispenser " type="_Er-LsNVIEfCYZcqbPlE1Ng" association="_eBKVgNVMEfCYZcqbPlE1Ng">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_eBK8kdVMEfCYZcqbPlE1Ng" value="*"/>
+            </ownedEnd>
+            <ownedEnd xmi:type="uml:Property" xmi:id="_eBK8ktVMEfCYZcqbPlE1Ng" name="mqtt central server" type="_airOsNVHEfCYZcqbPlE1Ng" association="_eBKVgNVMEfCYZcqbPlE1Ng"/>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Association" xmi:id="_efYikNVMEfCYZcqbPlE1Ng" memberEnd="_efZwsdVMEfCYZcqbPlE1Ng _efZwtNVMEfCYZcqbPlE1Ng" navigableOwnedEnd="_efZwsdVMEfCYZcqbPlE1Ng">
+            <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_efZJoNVMEfCYZcqbPlE1Ng" source="org.eclipse.papyrus">
+              <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_efZwsNVMEfCYZcqbPlE1Ng" key="nature" value="UML_Nature"/>
+            </eAnnotations>
+            <ownedEnd xmi:type="uml:Property" xmi:id="_efZwsdVMEfCYZcqbPlE1Ng" name="smart coffee capsules dispenser " type="_Er-LsNVIEfCYZcqbPlE1Ng" association="_efYikNVMEfCYZcqbPlE1Ng">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_efZws9VMEfCYZcqbPlE1Ng" value="*"/>
+            </ownedEnd>
+            <ownedEnd xmi:type="uml:Property" xmi:id="_efZwtNVMEfCYZcqbPlE1Ng" name="maintenance operator" type="_ciGv0NVHEfCYZcqbPlE1Ng" association="_efYikNVMEfCYZcqbPlE1Ng"/>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Association" xmi:id="_E-P1MNVNEfCYZcqbPlE1Ng" memberEnd="_E-QcQtVNEfCYZcqbPlE1Ng _E-QcRdVNEfCYZcqbPlE1Ng" navigableOwnedEnd="_E-QcQtVNEfCYZcqbPlE1Ng">
+            <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_E-QcQNVNEfCYZcqbPlE1Ng" source="org.eclipse.papyrus">
+              <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_E-QcQdVNEfCYZcqbPlE1Ng" key="nature" value="UML_Nature"/>
+            </eAnnotations>
+            <ownedEnd xmi:type="uml:Property" xmi:id="_E-QcQtVNEfCYZcqbPlE1Ng" name="smart coffee capsules dispenser " type="_Er-LsNVIEfCYZcqbPlE1Ng" aggregation="composite" association="_E-P1MNVNEfCYZcqbPlE1Ng">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_HLH8cNVNEfCYZcqbPlE1Ng" value="*"/>
+            </ownedEnd>
+            <ownedEnd xmi:type="uml:Property" xmi:id="_E-QcRdVNEfCYZcqbPlE1Ng" name="www server" type="_ZaA9gNVHEfCYZcqbPlE1Ng" association="_E-P1MNVNEfCYZcqbPlE1Ng"/>
+          </packagedElement>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Package" xmi:id="_LP6BgNVCEfCYZcqbPlE1Ng" name="4 Traceability"/>
+      </packagedElement>
+    </packagedElement>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_s4HjsNVBEfCYZcqbPlE1Ng">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_s4IKwNVBEfCYZcqbPlE1Ng" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/papyrus/sysml/1.6/SysML#/"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://SysML16_PROFILES/SysML.profile.uml#SysML"/>
+    </profileApplication>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_s5CJsNVBEfCYZcqbPlE1Ng">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_s5CJsdVBEfCYZcqbPlE1Ng" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/papyrus/sysml/1.6/SysML#//activities"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://SysML16_PROFILES/SysML.profile.uml#SysML.package_packagedElement_Activities"/>
+    </profileApplication>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_s5CwwNVBEfCYZcqbPlE1Ng">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_s5CwwdVBEfCYZcqbPlE1Ng" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/papyrus/sysml/1.6/SysML#//allocations"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://SysML16_PROFILES/SysML.profile.uml#SysML.package_packagedElement_Allocations"/>
+    </profileApplication>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_s5CwwtVBEfCYZcqbPlE1Ng">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_s5Cww9VBEfCYZcqbPlE1Ng" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/papyrus/sysml/1.6/SysML#//blocks"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://SysML16_PROFILES/SysML.profile.uml#SysML.package_packagedElement_Blocks"/>
+    </profileApplication>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_s5CwxNVBEfCYZcqbPlE1Ng">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_s5CwxdVBEfCYZcqbPlE1Ng" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/papyrus/sysml/1.6/SysML#//constraintblocks"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://SysML16_PROFILES/SysML.profile.uml#SysML.package_packagedElement_ConstraintBlocks"/>
+    </profileApplication>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_s5CwxtVBEfCYZcqbPlE1Ng">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_s5Cwx9VBEfCYZcqbPlE1Ng" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/papyrus/sysml/1.6/SysML#//deprecatedelements"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://SysML16_PROFILES/SysML.profile.uml#SysML.package_packagedElement_DeprecatedElements"/>
+    </profileApplication>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_s5CwyNVBEfCYZcqbPlE1Ng">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_s5CwydVBEfCYZcqbPlE1Ng" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/papyrus/sysml/1.6/SysML#//modelelements"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://SysML16_PROFILES/SysML.profile.uml#SysML.package_packagedElement_ModelElements"/>
+    </profileApplication>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_s5DX0NVBEfCYZcqbPlE1Ng">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_s5DX0dVBEfCYZcqbPlE1Ng" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/papyrus/sysml/1.6/SysML#//portsandflows"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://SysML16_PROFILES/SysML.profile.uml#SysML.package_packagedElement_Ports_u0026Flows"/>
+    </profileApplication>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_s5DX0tVBEfCYZcqbPlE1Ng">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_s5DX09VBEfCYZcqbPlE1Ng" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/papyrus/sysml/1.6/SysML#//requirements"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://SysML16_PROFILES/SysML.profile.uml#SysML.package_packagedElement_Requirements"/>
+    </profileApplication>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_s5DX1NVBEfCYZcqbPlE1Ng">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_s5DX1dVBEfCYZcqbPlE1Ng" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/uml2/5.0.0/UML/Profile/Standard#/"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://UML_PROFILES/Standard.profile.uml#_0"/>
+    </profileApplication>
+  </uml:Model>
+  <Requirements:Requirement xmi:id="_j6xjUNVDEfCYZcqbPlE1Ng" base_NamedElement="_j6nLQNVDEfCYZcqbPlE1Ng" id="FR1" text="When a user presents an NFC card to the Reader, the system shall authenticate the user and log the user ID." base_Class="_j6nLQNVDEfCYZcqbPlE1Ng"/>
+  <Requirements:Requirement xmi:id="_kyi40NVDEfCYZcqbPlE1Ng" base_NamedElement="_kyeAUNVDEfCYZcqbPlE1Ng" id="FR2" text="After successful login, the system shall allow the user to select a capsule flavor." base_Class="_kyeAUNVDEfCYZcqbPlE1Ng"/>
+  <Requirements:Requirement xmi:id="_lpV98NVDEfCYZcqbPlE1Ng" base_NamedElement="_lpRsgNVDEfCYZcqbPlE1Ng" id="FR3" text="When a flavor is selected, the system shall send the selection and the user ID to the WWW server." base_Class="_lpRsgNVDEfCYZcqbPlE1Ng"/>
+  <Requirements:Requirement xmi:id="_maBM8NVDEfCYZcqbPlE1Ng" base_NamedElement="_mZ9ikNVDEfCYZcqbPlE1Ng" id="FR4" text="When capsules are present inside the dispenser, the system shall detect individual capsules using sensors." base_Class="_mZ9ikNVDEfCYZcqbPlE1Ng"/>
+  <Requirements:Requirement xmi:id="_nATJ0NVDEfCYZcqbPlE1Ng" base_NamedElement="_nAQGgNVDEfCYZcqbPlE1Ng" id="FR5" text="The system shall maintain an updated count of remaining capsules." base_Class="_nAQGgNVDEfCYZcqbPlE1Ng"/>
+  <Requirements:Requirement xmi:id="_nsh9sNVDEfCYZcqbPlE1Ng" base_NamedElement="_nsdsQNVDEfCYZcqbPlE1Ng" id="FR6" text="When capsule count becomes low, the system shall activate a low-stock warning." base_Class="_nsdsQNVDEfCYZcqbPlE1Ng"/>
+  <Requirements:Requirement xmi:id="_ooR0QNVDEfCYZcqbPlE1Ng" base_NamedElement="_ooOw8NVDEfCYZcqbPlE1Ng" id="FR7" text="When an operator refills the dispenser, the system shall automatically generate a refill event and notify the server." base_Class="_ooOw8NVDEfCYZcqbPlE1Ng"/>
+  <Requirements:Requirement xmi:id="_pfbesNVDEfCYZcqbPlE1Ng" base_NamedElement="_pfX0UNVDEfCYZcqbPlE1Ng" id="FR8" text="The system shall periodically send capsule availability and operational status to a central MQTT server." base_Class="_pfX0UNVDEfCYZcqbPlE1Ng"/>
+  <Requirements:Requirement xmi:id="_rh_zYNVDEfCYZcqbPlE1Ng" base_NamedElement="_rh8wENVDEfCYZcqbPlE1Ng" id="FR9" text="When a user request is validated, the system shall control the servo motor to dispense exactly one capsule." base_Class="_rh8wENVDEfCYZcqbPlE1Ng"/>
+  <Requirements:Requirement xmi:id="_sHfGENVDEfCYZcqbPlE1Ng" base_NamedElement="_sHcCwNVDEfCYZcqbPlE1Ng" id="FR10" text="The system shall perform redundant checks (e.g., multiple sensors) to detect possible failures." base_Class="_sHcCwNVDEfCYZcqbPlE1Ng"/>
+  <Requirements:Requirement xmi:id="_4GYhANVDEfCYZcqbPlE1Ng" base_NamedElement="_4GU2oNVDEfCYZcqbPlE1Ng" id="QR1" text="The system shall detect discrepancies between redundant sensors and trigger a failure state when inconsistencies exist." base_Class="_4GU2oNVDEfCYZcqbPlE1Ng"/>
+  <Requirements:Requirement xmi:id="_4v5YENVDEfCYZcqbPlE1Ng" base_NamedElement="_4v2UwNVDEfCYZcqbPlE1Ng" id="QR2" text="If a capsule is requested but the sensor count does not change, the system shall disable the dispenser and notify maintenance." base_Class="_4v2UwNVDEfCYZcqbPlE1Ng"/>
+  <Requirements:Requirement xmi:id="_5gUIYNVDEfCYZcqbPlE1Ng" base_NamedElement="_5gRFENVDEfCYZcqbPlE1Ng" id="QR3" text="The system shall guarantee correct transmission of user ID, selection, and capsule data to servers." base_Class="_5gRFENVDEfCYZcqbPlE1Ng"/>
+  <Requirements:Requirement xmi:id="_6UTKENVDEfCYZcqbPlE1Ng" base_NamedElement="_6UQGwNVDEfCYZcqbPlE1Ng" id="QR4" text="The system shall prevent unauthorized NFC login attempts." base_Class="_6UQGwNVDEfCYZcqbPlE1Ng"/>
+  <Requirements:Requirement xmi:id="_6-93sNVDEfCYZcqbPlE1Ng" base_NamedElement="_6-60YNVDEfCYZcqbPlE1Ng" id="QR5" text="The system shall ensure servo motor will not run continuously or overheat." base_Class="_6-60YNVDEfCYZcqbPlE1Ng"/>
+  <Blocks:Block xmi:id="_yBzoENVGEfCYZcqbPlE1Ng" base_Class="_yBv9sNVGEfCYZcqbPlE1Ng"/>
+  <Blocks:Block xmi:id="_1HnicNVGEfCYZcqbPlE1Ng" base_Class="_1HkfINVGEfCYZcqbPlE1Ng"/>
+  <Blocks:Block xmi:id="_1mNi8NVGEfCYZcqbPlE1Ng" base_Class="_1mKfoNVGEfCYZcqbPlE1Ng"/>
+  <Blocks:Block xmi:id="_2L4b0NVGEfCYZcqbPlE1Ng" base_Class="_2L1_kNVGEfCYZcqbPlE1Ng"/>
+  <Blocks:Block xmi:id="_2y-4ENVGEfCYZcqbPlE1Ng" base_Class="_2y70wNVGEfCYZcqbPlE1Ng"/>
+  <Blocks:Block xmi:id="_3xkAMNVGEfCYZcqbPlE1Ng" base_Class="_3xhj8NVGEfCYZcqbPlE1Ng"/>
+  <Blocks:Block xmi:id="_mPKD8NVHEfCYZcqbPlE1Ng" base_Class="_mPHAoNVHEfCYZcqbPlE1Ng"/>
+  <Blocks:Block xmi:id="_EsBPANVIEfCYZcqbPlE1Ng" base_Class="_Er-LsNVIEfCYZcqbPlE1Ng"/>
+  <PortsAndFlows:ItemFlow xmi:id="_UwOyINVLEfCYZcqbPlE1Ng" base_InformationFlow="_UwKgsNVLEfCYZcqbPlE1Ng"/>
+  <PortsAndFlows:ItemFlow xmi:id="_hFNx0NVLEfCYZcqbPlE1Ng" base_InformationFlow="_hFISQNVLEfCYZcqbPlE1Ng"/>
+  <PortsAndFlows:ItemFlow xmi:id="_mzProNVLEfCYZcqbPlE1Ng" base_InformationFlow="_mzMBQNVLEfCYZcqbPlE1Ng"/>
+  <PortsAndFlows:ItemFlow xmi:id="_nRK9wNVLEfCYZcqbPlE1Ng" base_InformationFlow="_nRKWsNVLEfCYZcqbPlE1Ng"/>
+  <PortsAndFlows:ItemFlow xmi:id="_rGK5YNVLEfCYZcqbPlE1Ng" base_InformationFlow="_rGIdINVLEfCYZcqbPlE1Ng"/>
+  <PortsAndFlows:ItemFlow xmi:id="_tWO3gNVLEfCYZcqbPlE1Ng" base_InformationFlow="_tWLNINVLEfCYZcqbPlE1Ng"/>
+  <PortsAndFlows:ItemFlow xmi:id="_vuB1UNVLEfCYZcqbPlE1Ng" base_InformationFlow="_vt-K8NVLEfCYZcqbPlE1Ng"/>
+  <PortsAndFlows:ItemFlow xmi:id="_xxpS4NVLEfCYZcqbPlE1Ng" base_InformationFlow="_xxmPkNVLEfCYZcqbPlE1Ng"/>
+  <PortsAndFlows:ItemFlow xmi:id="_zc560NVLEfCYZcqbPlE1Ng" base_InformationFlow="_zc23gNVLEfCYZcqbPlE1Ng"/>
+  <PortsAndFlows:ItemFlow xmi:id="_21uQwNVLEfCYZcqbPlE1Ng" base_InformationFlow="_21rNcNVLEfCYZcqbPlE1Ng"/>
+</xmi:XMI>
