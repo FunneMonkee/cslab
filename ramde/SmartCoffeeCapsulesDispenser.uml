@@ -37,7 +37,127 @@
             <packagedElement xmi:type="uml:Class" xmi:id="_6-60YNVDEfCYZcqbPlE1Ng" name="Safe Motor Operation"/>
           </packagedElement>
         </packagedElement>
-        <packagedElement xmi:type="uml:Package" xmi:id="_Gxq7oNVCEfCYZcqbPlE1Ng" name="2 Use Cases"/>
+        <packagedElement xmi:type="uml:Package" xmi:id="_Gxq7oNVCEfCYZcqbPlE1Ng" name="2 Use Cases">
+          <packagedElement xmi:type="uml:Package" xmi:id="_ZI-7kNZ-EfCBJ9x1fXma2Q" name="1 Use Case Diagram">
+            <packagedElement xmi:type="uml:UseCase" xmi:id="_fUC_0NXzEfCBJ9x1fXma2Q" name="User Login"/>
+            <packagedElement xmi:type="uml:UseCase" xmi:id="_aV2LANX0EfCBJ9x1fXma2Q" name="Flavor Selection"/>
+            <packagedElement xmi:type="uml:UseCase" xmi:id="_gGizwNXzEfCBJ9x1fXma2Q" name="Dispense Capsule"/>
+            <packagedElement xmi:type="uml:UseCase" xmi:id="_gmoCANXzEfCBJ9x1fXma2Q" name="Monitor Capsule Stock"/>
+            <packagedElement xmi:type="uml:UseCase" xmi:id="_hJuvENXzEfCBJ9x1fXma2Q" name="Warn Low Stock"/>
+            <packagedElement xmi:type="uml:UseCase" xmi:id="_hq7XoNXzEfCBJ9x1fXma2Q" name="Refill the Machine"/>
+            <packagedElement xmi:type="uml:UseCase" xmi:id="_iZkmUNXzEfCBJ9x1fXma2Q" name="Send to MQTT"/>
+            <packagedElement xmi:type="uml:UseCase" xmi:id="_fwLswNX0EfCBJ9x1fXma2Q" name="Send to WWW"/>
+            <packagedElement xmi:type="uml:UseCase" xmi:id="_jMqQINXzEfCBJ9x1fXma2Q" name="Detect Failures (Redundancy Checks)"/>
+            <packagedElement xmi:type="uml:UseCase" xmi:id="_CNnC4NX4EfCBJ9x1fXma2Q" name="Check Control Centre"/>
+            <packagedElement xmi:type="uml:Association" xmi:id="_MdaTwNZxEfCBJ9x1fXma2Q"/>
+            <packagedElement xmi:type="uml:Association" xmi:id="_Ob-5QNZxEfCBJ9x1fXma2Q"/>
+            <packagedElement xmi:type="uml:Association" xmi:id="_QTqMkNZxEfCBJ9x1fXma2Q"/>
+            <packagedElement xmi:type="uml:Association" xmi:id="_s5lEINZxEfCBJ9x1fXma2Q"/>
+            <packagedElement xmi:type="uml:Association" xmi:id="_teRFkNZxEfCBJ9x1fXma2Q"/>
+            <packagedElement xmi:type="uml:Association" xmi:id="_AXywUNZyEfCBJ9x1fXma2Q"/>
+            <packagedElement xmi:type="uml:Association" xmi:id="_B6KiANZyEfCBJ9x1fXma2Q"/>
+            <packagedElement xmi:type="uml:Association" xmi:id="_Cf7hgNZyEfCBJ9x1fXma2Q"/>
+            <packagedElement xmi:type="uml:Association" xmi:id="_ELz0gNZyEfCBJ9x1fXma2Q"/>
+            <packagedElement xmi:type="uml:Association" xmi:id="_HN6TkNZyEfCBJ9x1fXma2Q"/>
+            <packagedElement xmi:type="uml:Association" xmi:id="_JBfKANZyEfCBJ9x1fXma2Q"/>
+            <packagedElement xmi:type="uml:Association" xmi:id="_KZs6INZyEfCBJ9x1fXma2Q"/>
+            <packagedElement xmi:type="uml:Association" xmi:id="_LJIzANZyEfCBJ9x1fXma2Q"/>
+            <packagedElement xmi:type="uml:Association" xmi:id="_Mq4SkNZyEfCBJ9x1fXma2Q"/>
+            <packagedElement xmi:type="uml:Association" xmi:id="_NMLo0NZyEfCBJ9x1fXma2Q"/>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Package" xmi:id="_dw13gNZ-EfCBJ9x1fXma2Q" name="2 Activity Diagram">
+            <packagedElement xmi:type="uml:Activity" xmi:id="_fzKUkNZ-EfCBJ9x1fXma2Q" name="Dispensing" node="_QT24gNZ_EfCBJ9x1fXma2Q _RaV_cNZ_EfCBJ9x1fXma2Q _R9IjcNZ_EfCBJ9x1fXma2Q _XicmINZ_EfCBJ9x1fXma2Q _kaP_ANZ_EfCBJ9x1fXma2Q _k1phkNZ_EfCBJ9x1fXma2Q _lXfDUNZ_EfCBJ9x1fXma2Q _l9c3INZ_EfCBJ9x1fXma2Q _ydaXwNZ_EfCBJ9x1fXma2Q _2bO4MNZ_EfCBJ9x1fXma2Q _23BcUNZ_EfCBJ9x1fXma2Q _3YdVcNZ_EfCBJ9x1fXma2Q _V797ENaAEfCBJ9x1fXma2Q _WvfCsNaAEfCBJ9x1fXma2Q _wvC8ANaAEfCBJ9x1fXma2Q _xLEJoNaAEfCBJ9x1fXma2Q _9DqvUNaAEfCBJ9x1fXma2Q _D4TE0NaBEfCBJ9x1fXma2Q _EUU5gNaBEfCBJ9x1fXma2Q _EvDGoNaBEfCBJ9x1fXma2Q _a1xtMNaBEfCBJ9x1fXma2Q _cBmAENaBEfCBJ9x1fXma2Q _rAr1kNaBEfCBJ9x1fXma2Q _wpeqENaBEfCBJ9x1fXma2Q _xKuV8NaBEfCBJ9x1fXma2Q _xumfENaBEfCBJ9x1fXma2Q _4XJgYNaBEfCBJ9x1fXma2Q _8eskkNaBEfCBJ9x1fXma2Q _A4WFYNaCEfCBJ9x1fXma2Q _Q-NVsNaCEfCBJ9x1fXma2Q _WFvQMNaCEfCBJ9x1fXma2Q _hjj-YNaCEfCBJ9x1fXma2Q _onvLwNaCEfCBJ9x1fXma2Q _qA9ogNaCEfCBJ9x1fXma2Q _zeR3gNaCEfCBJ9x1fXma2Q _0ZPD4NaCEfCBJ9x1fXma2Q _yr87UNaFEfCBJ9x1fXma2Q _1FSKMNaFEfCBJ9x1fXma2Q _4s5KENaFEfCBJ9x1fXma2Q _86ADsNaFEfCBJ9x1fXma2Q _FCzW0NaGEfCBJ9x1fXma2Q" group="_jPSdMNZ-EfCBJ9x1fXma2Q _vayJsNZ-EfCBJ9x1fXma2Q _wZcKUNZ-EfCBJ9x1fXma2Q _xD3nYNZ-EfCBJ9x1fXma2Q _xj7ngNZ-EfCBJ9x1fXma2Q _yJ7QgNZ-EfCBJ9x1fXma2Q">
+              <edge xmi:type="uml:ControlFlow" xmi:id="__gNQ8NaFEfCBJ9x1fXma2Q" target="_QT24gNZ_EfCBJ9x1fXma2Q" source="_XicmINZ_EfCBJ9x1fXma2Q"/>
+              <edge xmi:type="uml:ControlFlow" xmi:id="_A1gP8NaGEfCBJ9x1fXma2Q" target="_RaV_cNZ_EfCBJ9x1fXma2Q" source="_QT24gNZ_EfCBJ9x1fXma2Q"/>
+              <edge xmi:type="uml:ControlFlow" xmi:id="_B-n0INaGEfCBJ9x1fXma2Q" target="_R9IjcNZ_EfCBJ9x1fXma2Q" source="_RaV_cNZ_EfCBJ9x1fXma2Q"/>
+              <edge xmi:type="uml:ControlFlow" xmi:id="_CsaHMNaGEfCBJ9x1fXma2Q" target="_kaP_ANZ_EfCBJ9x1fXma2Q" source="_R9IjcNZ_EfCBJ9x1fXma2Q"/>
+              <edge xmi:type="uml:ControlFlow" xmi:id="_DRkpwNaGEfCBJ9x1fXma2Q" target="_k1phkNZ_EfCBJ9x1fXma2Q" source="_kaP_ANZ_EfCBJ9x1fXma2Q"/>
+              <edge xmi:type="uml:ControlFlow" xmi:id="_EHxR8NaGEfCBJ9x1fXma2Q" target="_ydaXwNZ_EfCBJ9x1fXma2Q" source="_k1phkNZ_EfCBJ9x1fXma2Q"/>
+              <edge xmi:type="uml:ControlFlow" xmi:id="_GmCrMNaGEfCBJ9x1fXma2Q" target="_FCzW0NaGEfCBJ9x1fXma2Q" source="_l9c3INZ_EfCBJ9x1fXma2Q"/>
+              <edge xmi:type="uml:ControlFlow" xmi:id="_HeCqMNaGEfCBJ9x1fXma2Q" target="_2bO4MNZ_EfCBJ9x1fXma2Q" source="_lXfDUNZ_EfCBJ9x1fXma2Q"/>
+              <edge xmi:type="uml:ControlFlow" xmi:id="_JDygANaGEfCBJ9x1fXma2Q" name="Yes" target="_lXfDUNZ_EfCBJ9x1fXma2Q" source="_ydaXwNZ_EfCBJ9x1fXma2Q"/>
+              <edge xmi:type="uml:ControlFlow" xmi:id="_Kj62ANaGEfCBJ9x1fXma2Q" name="No" target="_l9c3INZ_EfCBJ9x1fXma2Q" source="_ydaXwNZ_EfCBJ9x1fXma2Q"/>
+              <edge xmi:type="uml:ControlFlow" xmi:id="_MTyRINaGEfCBJ9x1fXma2Q" target="_23BcUNZ_EfCBJ9x1fXma2Q" source="_2bO4MNZ_EfCBJ9x1fXma2Q"/>
+              <edge xmi:type="uml:ControlFlow" xmi:id="_M3sPcNaGEfCBJ9x1fXma2Q" target="_3YdVcNZ_EfCBJ9x1fXma2Q" source="_23BcUNZ_EfCBJ9x1fXma2Q"/>
+              <edge xmi:type="uml:ControlFlow" xmi:id="_N9UawNaGEfCBJ9x1fXma2Q" target="_V797ENaAEfCBJ9x1fXma2Q" source="_3YdVcNZ_EfCBJ9x1fXma2Q"/>
+              <edge xmi:type="uml:ControlFlow" xmi:id="_OjhfINaGEfCBJ9x1fXma2Q" target="_WvfCsNaAEfCBJ9x1fXma2Q" source="_V797ENaAEfCBJ9x1fXma2Q"/>
+              <edge xmi:type="uml:ControlFlow" xmi:id="_PgCxwNaGEfCBJ9x1fXma2Q" target="_wvC8ANaAEfCBJ9x1fXma2Q" source="_WvfCsNaAEfCBJ9x1fXma2Q"/>
+              <edge xmi:type="uml:ControlFlow" xmi:id="_QDEmUNaGEfCBJ9x1fXma2Q" target="_xLEJoNaAEfCBJ9x1fXma2Q" source="_wvC8ANaAEfCBJ9x1fXma2Q"/>
+              <edge xmi:type="uml:ControlFlow" xmi:id="_Vna_sNaGEfCBJ9x1fXma2Q" target="_9DqvUNaAEfCBJ9x1fXma2Q" source="_xLEJoNaAEfCBJ9x1fXma2Q"/>
+              <edge xmi:type="uml:ControlFlow" xmi:id="_W6E6YNaGEfCBJ9x1fXma2Q" target="_D4TE0NaBEfCBJ9x1fXma2Q" source="_9DqvUNaAEfCBJ9x1fXma2Q"/>
+              <edge xmi:type="uml:ControlFlow" xmi:id="_XaLWwNaGEfCBJ9x1fXma2Q" target="_cBmAENaBEfCBJ9x1fXma2Q" source="_D4TE0NaBEfCBJ9x1fXma2Q"/>
+              <edge xmi:type="uml:ControlFlow" xmi:id="_X5RGgNaGEfCBJ9x1fXma2Q" name="Yes" target="_EUU5gNaBEfCBJ9x1fXma2Q" source="_cBmAENaBEfCBJ9x1fXma2Q"/>
+              <edge xmi:type="uml:ControlFlow" xmi:id="_YoKz4NaGEfCBJ9x1fXma2Q" name="No" target="_EvDGoNaBEfCBJ9x1fXma2Q" source="_cBmAENaBEfCBJ9x1fXma2Q"/>
+              <edge xmi:type="uml:ControlFlow" xmi:id="_bx2hoNaGEfCBJ9x1fXma2Q" target="_a1xtMNaBEfCBJ9x1fXma2Q" source="_EUU5gNaBEfCBJ9x1fXma2Q"/>
+              <edge xmi:type="uml:ControlFlow" xmi:id="_cOW3cNaGEfCBJ9x1fXma2Q" target="_a1xtMNaBEfCBJ9x1fXma2Q" source="_EvDGoNaBEfCBJ9x1fXma2Q"/>
+              <edge xmi:type="uml:ControlFlow" xmi:id="_dVk-MNaGEfCBJ9x1fXma2Q" target="_rAr1kNaBEfCBJ9x1fXma2Q" source="_a1xtMNaBEfCBJ9x1fXma2Q"/>
+              <edge xmi:type="uml:ControlFlow" xmi:id="_eKd-0NaGEfCBJ9x1fXma2Q" name="Yes" target="_wpeqENaBEfCBJ9x1fXma2Q" source="_rAr1kNaBEfCBJ9x1fXma2Q"/>
+              <edge xmi:type="uml:ControlFlow" xmi:id="_ewzmENaGEfCBJ9x1fXma2Q" target="_xKuV8NaBEfCBJ9x1fXma2Q" source="_wpeqENaBEfCBJ9x1fXma2Q"/>
+              <edge xmi:type="uml:ControlFlow" xmi:id="_fPtIkNaGEfCBJ9x1fXma2Q" target="_xumfENaBEfCBJ9x1fXma2Q" source="_xKuV8NaBEfCBJ9x1fXma2Q"/>
+              <edge xmi:type="uml:ControlFlow" xmi:id="_fvteUNaGEfCBJ9x1fXma2Q" target="_4XJgYNaBEfCBJ9x1fXma2Q" source="_xumfENaBEfCBJ9x1fXma2Q"/>
+              <edge xmi:type="uml:ControlFlow" xmi:id="_hr1z0NaGEfCBJ9x1fXma2Q" inPartition="_yJ7QgNZ-EfCBJ9x1fXma2Q" target="_8eskkNaBEfCBJ9x1fXma2Q" source="_rAr1kNaBEfCBJ9x1fXma2Q"/>
+              <edge xmi:type="uml:ControlFlow" xmi:id="_l6YQ0NaGEfCBJ9x1fXma2Q" name="No" target="_A4WFYNaCEfCBJ9x1fXma2Q" source="_8eskkNaBEfCBJ9x1fXma2Q"/>
+              <edge xmi:type="uml:ControlFlow" xmi:id="_mWpWENaGEfCBJ9x1fXma2Q" target="_Q-NVsNaCEfCBJ9x1fXma2Q" source="_A4WFYNaCEfCBJ9x1fXma2Q"/>
+              <edge xmi:type="uml:ControlFlow" xmi:id="_n5QYUNaGEfCBJ9x1fXma2Q" name="Yes" target="_WFvQMNaCEfCBJ9x1fXma2Q" source="_8eskkNaBEfCBJ9x1fXma2Q"/>
+              <edge xmi:type="uml:ControlFlow" xmi:id="_u9XUQNaGEfCBJ9x1fXma2Q" target="_hjj-YNaCEfCBJ9x1fXma2Q" source="_WFvQMNaCEfCBJ9x1fXma2Q"/>
+              <edge xmi:type="uml:ControlFlow" xmi:id="_veXvkNaGEfCBJ9x1fXma2Q" target="_onvLwNaCEfCBJ9x1fXma2Q" source="_hjj-YNaCEfCBJ9x1fXma2Q"/>
+              <edge xmi:type="uml:ControlFlow" xmi:id="_wQ4xoNaGEfCBJ9x1fXma2Q" target="_qA9ogNaCEfCBJ9x1fXma2Q" source="_onvLwNaCEfCBJ9x1fXma2Q"/>
+              <edge xmi:type="uml:ControlFlow" xmi:id="_xn9SQNaGEfCBJ9x1fXma2Q" target="_zeR3gNaCEfCBJ9x1fXma2Q" source="_qA9ogNaCEfCBJ9x1fXma2Q"/>
+              <edge xmi:type="uml:ControlFlow" xmi:id="_yGiEoNaGEfCBJ9x1fXma2Q" target="_0ZPD4NaCEfCBJ9x1fXma2Q" source="_zeR3gNaCEfCBJ9x1fXma2Q"/>
+              <edge xmi:type="uml:ControlFlow" xmi:id="_zBBW8NaGEfCBJ9x1fXma2Q" target="_yr87UNaFEfCBJ9x1fXma2Q" source="_0ZPD4NaCEfCBJ9x1fXma2Q"/>
+              <edge xmi:type="uml:ControlFlow" xmi:id="_zz5lYNaGEfCBJ9x1fXma2Q" target="_1FSKMNaFEfCBJ9x1fXma2Q" source="_yr87UNaFEfCBJ9x1fXma2Q"/>
+              <edge xmi:type="uml:ControlFlow" xmi:id="_01BEINaGEfCBJ9x1fXma2Q" target="_4s5KENaFEfCBJ9x1fXma2Q" source="_1FSKMNaFEfCBJ9x1fXma2Q"/>
+              <edge xmi:type="uml:ControlFlow" xmi:id="_2CaEUNaGEfCBJ9x1fXma2Q" inPartition="_jPSdMNZ-EfCBJ9x1fXma2Q" target="_86ADsNaFEfCBJ9x1fXma2Q" source="_4s5KENaFEfCBJ9x1fXma2Q"/>
+              <group xmi:type="uml:ActivityPartition" xmi:id="_jPSdMNZ-EfCBJ9x1fXma2Q" name="User Interface Subsystem" node="_XicmINZ_EfCBJ9x1fXma2Q _4s5KENaFEfCBJ9x1fXma2Q _86ADsNaFEfCBJ9x1fXma2Q" edge="_2CaEUNaGEfCBJ9x1fXma2Q"/>
+              <group xmi:type="uml:ActivityPartition" xmi:id="_vayJsNZ-EfCBJ9x1fXma2Q" name="Sensing Subsystem"/>
+              <group xmi:type="uml:ActivityPartition" xmi:id="_wZcKUNZ-EfCBJ9x1fXma2Q" name="Actuation Subsystem"/>
+              <group xmi:type="uml:ActivityPartition" xmi:id="_xD3nYNZ-EfCBJ9x1fXma2Q" name="Communication Subsystem"/>
+              <group xmi:type="uml:ActivityPartition" xmi:id="_xj7ngNZ-EfCBJ9x1fXma2Q" name="Safety &amp; Diagnostics Subsystem" node="_a1xtMNaBEfCBJ9x1fXma2Q _cBmAENaBEfCBJ9x1fXma2Q"/>
+              <group xmi:type="uml:ActivityPartition" xmi:id="_yJ7QgNZ-EfCBJ9x1fXma2Q" name="Control Subsystem (Main MCU)" node="_ydaXwNZ_EfCBJ9x1fXma2Q _rAr1kNaBEfCBJ9x1fXma2Q _4XJgYNaBEfCBJ9x1fXma2Q _8eskkNaBEfCBJ9x1fXma2Q _Q-NVsNaCEfCBJ9x1fXma2Q _FCzW0NaGEfCBJ9x1fXma2Q" edge="_hr1z0NaGEfCBJ9x1fXma2Q"/>
+              <node xmi:type="uml:OpaqueAction" xmi:id="_QT24gNZ_EfCBJ9x1fXma2Q" name="User presents NFC card" incoming="__gNQ8NaFEfCBJ9x1fXma2Q" outgoing="_A1gP8NaGEfCBJ9x1fXma2Q"/>
+              <node xmi:type="uml:OpaqueAction" xmi:id="_RaV_cNZ_EfCBJ9x1fXma2Q" name="Read NFC card ID" incoming="_A1gP8NaGEfCBJ9x1fXma2Q" outgoing="_B-n0INaGEfCBJ9x1fXma2Q"/>
+              <node xmi:type="uml:OpaqueAction" xmi:id="_R9IjcNZ_EfCBJ9x1fXma2Q" name="Send NFC ID to Control Subsystem" incoming="_B-n0INaGEfCBJ9x1fXma2Q" outgoing="_CsaHMNaGEfCBJ9x1fXma2Q"/>
+              <node xmi:type="uml:InitialNode" xmi:id="_XicmINZ_EfCBJ9x1fXma2Q" outgoing="__gNQ8NaFEfCBJ9x1fXma2Q" inPartition="_jPSdMNZ-EfCBJ9x1fXma2Q"/>
+              <node xmi:type="uml:OpaqueAction" xmi:id="_kaP_ANZ_EfCBJ9x1fXma2Q" name="Receive NFC ID" incoming="_CsaHMNaGEfCBJ9x1fXma2Q" outgoing="_DRkpwNaGEfCBJ9x1fXma2Q"/>
+              <node xmi:type="uml:OpaqueAction" xmi:id="_k1phkNZ_EfCBJ9x1fXma2Q" name="Validate user credentials" incoming="_DRkpwNaGEfCBJ9x1fXma2Q" outgoing="_EHxR8NaGEfCBJ9x1fXma2Q"/>
+              <node xmi:type="uml:OpaqueAction" xmi:id="_lXfDUNZ_EfCBJ9x1fXma2Q" name="Acknowledge login to UI " incoming="_JDygANaGEfCBJ9x1fXma2Q" outgoing="_HeCqMNaGEfCBJ9x1fXma2Q"/>
+              <node xmi:type="uml:OpaqueAction" xmi:id="_l9c3INZ_EfCBJ9x1fXma2Q" name="Send login failure message to UI" incoming="_Kj62ANaGEfCBJ9x1fXma2Q" outgoing="_GmCrMNaGEfCBJ9x1fXma2Q"/>
+              <node xmi:type="uml:DecisionNode" xmi:id="_ydaXwNZ_EfCBJ9x1fXma2Q" name="Authenticated?" incoming="_EHxR8NaGEfCBJ9x1fXma2Q" outgoing="_JDygANaGEfCBJ9x1fXma2Q _Kj62ANaGEfCBJ9x1fXma2Q" inPartition="_yJ7QgNZ-EfCBJ9x1fXma2Q"/>
+              <node xmi:type="uml:OpaqueAction" xmi:id="_2bO4MNZ_EfCBJ9x1fXma2Q" name="Display flavor options" incoming="_HeCqMNaGEfCBJ9x1fXma2Q" outgoing="_MTyRINaGEfCBJ9x1fXma2Q"/>
+              <node xmi:type="uml:OpaqueAction" xmi:id="_23BcUNZ_EfCBJ9x1fXma2Q" name="User selects flavor" incoming="_MTyRINaGEfCBJ9x1fXma2Q" outgoing="_M3sPcNaGEfCBJ9x1fXma2Q"/>
+              <node xmi:type="uml:OpaqueAction" xmi:id="_3YdVcNZ_EfCBJ9x1fXma2Q" name="Send selection to Control Subsystem" incoming="_M3sPcNaGEfCBJ9x1fXma2Q" outgoing="_N9UawNaGEfCBJ9x1fXma2Q"/>
+              <node xmi:type="uml:OpaqueAction" xmi:id="_V797ENaAEfCBJ9x1fXma2Q" name="Receive flavor selection" incoming="_N9UawNaGEfCBJ9x1fXma2Q" outgoing="_OjhfINaGEfCBJ9x1fXma2Q"/>
+              <node xmi:type="uml:OpaqueAction" xmi:id="_WvfCsNaAEfCBJ9x1fXma2Q" name="Request capsule availability from Sensing Subsystem" incoming="_OjhfINaGEfCBJ9x1fXma2Q" outgoing="_PgCxwNaGEfCBJ9x1fXma2Q"/>
+              <node xmi:type="uml:OpaqueAction" xmi:id="_wvC8ANaAEfCBJ9x1fXma2Q" name="Read redundant capsule sensors" incoming="_PgCxwNaGEfCBJ9x1fXma2Q" outgoing="_QDEmUNaGEfCBJ9x1fXma2Q"/>
+              <node xmi:type="uml:OpaqueAction" xmi:id="_xLEJoNaAEfCBJ9x1fXma2Q" name="Send sensor readings and redundancy data to Control Subsystem" incoming="_QDEmUNaGEfCBJ9x1fXma2Q" outgoing="_Vna_sNaGEfCBJ9x1fXma2Q"/>
+              <node xmi:type="uml:OpaqueAction" xmi:id="_9DqvUNaAEfCBJ9x1fXma2Q" name="Forward sensor data to Safety Subsystem" incoming="_Vna_sNaGEfCBJ9x1fXma2Q" outgoing="_W6E6YNaGEfCBJ9x1fXma2Q"/>
+              <node xmi:type="uml:OpaqueAction" xmi:id="_D4TE0NaBEfCBJ9x1fXma2Q" name="Perform redundancy check" incoming="_W6E6YNaGEfCBJ9x1fXma2Q" outgoing="_XaLWwNaGEfCBJ9x1fXma2Q"/>
+              <node xmi:type="uml:OpaqueAction" xmi:id="_EUU5gNaBEfCBJ9x1fXma2Q" name="Send &quot;OK&quot; to Control Subsystem" incoming="_X5RGgNaGEfCBJ9x1fXma2Q" outgoing="_bx2hoNaGEfCBJ9x1fXma2Q"/>
+              <node xmi:type="uml:OpaqueAction" xmi:id="_EvDGoNaBEfCBJ9x1fXma2Q" name="Send &quot;Fault&quot; to Control Subsystem" incoming="_YoKz4NaGEfCBJ9x1fXma2Q" outgoing="_cOW3cNaGEfCBJ9x1fXma2Q"/>
+              <node xmi:type="uml:MergeNode" xmi:id="_a1xtMNaBEfCBJ9x1fXma2Q" incoming="_bx2hoNaGEfCBJ9x1fXma2Q _cOW3cNaGEfCBJ9x1fXma2Q" outgoing="_dVk-MNaGEfCBJ9x1fXma2Q" inPartition="_xj7ngNZ-EfCBJ9x1fXma2Q"/>
+              <node xmi:type="uml:DecisionNode" xmi:id="_cBmAENaBEfCBJ9x1fXma2Q" name="Sensor Consistent?" incoming="_XaLWwNaGEfCBJ9x1fXma2Q" outgoing="_X5RGgNaGEfCBJ9x1fXma2Q _YoKz4NaGEfCBJ9x1fXma2Q" inPartition="_xj7ngNZ-EfCBJ9x1fXma2Q"/>
+              <node xmi:type="uml:DecisionNode" xmi:id="_rAr1kNaBEfCBJ9x1fXma2Q" name="Fault?" incoming="_dVk-MNaGEfCBJ9x1fXma2Q" outgoing="_eKd-0NaGEfCBJ9x1fXma2Q _hr1z0NaGEfCBJ9x1fXma2Q" inPartition="_yJ7QgNZ-EfCBJ9x1fXma2Q"/>
+              <node xmi:type="uml:OpaqueAction" xmi:id="_wpeqENaBEfCBJ9x1fXma2Q" name="Enter ERROR state" incoming="_eKd-0NaGEfCBJ9x1fXma2Q" outgoing="_ewzmENaGEfCBJ9x1fXma2Q"/>
+              <node xmi:type="uml:OpaqueAction" xmi:id="_xKuV8NaBEfCBJ9x1fXma2Q" name="Notify Communication Subsystem" incoming="_ewzmENaGEfCBJ9x1fXma2Q" outgoing="_fPtIkNaGEfCBJ9x1fXma2Q"/>
+              <node xmi:type="uml:OpaqueAction" xmi:id="_xumfENaBEfCBJ9x1fXma2Q" name="Notify UI of failure" incoming="_fPtIkNaGEfCBJ9x1fXma2Q" outgoing="_fvteUNaGEfCBJ9x1fXma2Q"/>
+              <node xmi:type="uml:ActivityFinalNode" xmi:id="_4XJgYNaBEfCBJ9x1fXma2Q" incoming="_fvteUNaGEfCBJ9x1fXma2Q" inPartition="_yJ7QgNZ-EfCBJ9x1fXma2Q"/>
+              <node xmi:type="uml:DecisionNode" xmi:id="_8eskkNaBEfCBJ9x1fXma2Q" name="Capsules Available?" incoming="_hr1z0NaGEfCBJ9x1fXma2Q" outgoing="_l6YQ0NaGEfCBJ9x1fXma2Q _n5QYUNaGEfCBJ9x1fXma2Q" inPartition="_yJ7QgNZ-EfCBJ9x1fXma2Q"/>
+              <node xmi:type="uml:OpaqueAction" xmi:id="_A4WFYNaCEfCBJ9x1fXma2Q" name="Trigger low-stock warning to UI" incoming="_l6YQ0NaGEfCBJ9x1fXma2Q" outgoing="_mWpWENaGEfCBJ9x1fXma2Q"/>
+              <node xmi:type="uml:ActivityFinalNode" xmi:id="_Q-NVsNaCEfCBJ9x1fXma2Q" incoming="_mWpWENaGEfCBJ9x1fXma2Q" inPartition="_yJ7QgNZ-EfCBJ9x1fXma2Q"/>
+              <node xmi:type="uml:OpaqueAction" xmi:id="_WFvQMNaCEfCBJ9x1fXma2Q" name="Send DISPENSE command to Actuation Subsystem" incoming="_n5QYUNaGEfCBJ9x1fXma2Q" outgoing="_u9XUQNaGEfCBJ9x1fXma2Q"/>
+              <node xmi:type="uml:OpaqueAction" xmi:id="_hjj-YNaCEfCBJ9x1fXma2Q" name="Move servo motor to release capsule" incoming="_u9XUQNaGEfCBJ9x1fXma2Q" outgoing="_veXvkNaGEfCBJ9x1fXma2Q"/>
+              <node xmi:type="uml:OpaqueAction" xmi:id="_onvLwNaCEfCBJ9x1fXma2Q" name="Detect capsule drop (level change)" incoming="_veXvkNaGEfCBJ9x1fXma2Q" outgoing="_wQ4xoNaGEfCBJ9x1fXma2Q"/>
+              <node xmi:type="uml:OpaqueAction" xmi:id="_qA9ogNaCEfCBJ9x1fXma2Q" name="Send updated reading to Control Subsystem" incoming="_wQ4xoNaGEfCBJ9x1fXma2Q" outgoing="_xn9SQNaGEfCBJ9x1fXma2Q"/>
+              <node xmi:type="uml:OpaqueAction" xmi:id="_zeR3gNaCEfCBJ9x1fXma2Q" name="Verify successful dispense" incoming="_xn9SQNaGEfCBJ9x1fXma2Q" outgoing="_yGiEoNaGEfCBJ9x1fXma2Q"/>
+              <node xmi:type="uml:OpaqueAction" xmi:id="_0ZPD4NaCEfCBJ9x1fXma2Q" name="Update internal capsule count" incoming="_yGiEoNaGEfCBJ9x1fXma2Q" outgoing="_zBBW8NaGEfCBJ9x1fXma2Q"/>
+              <node xmi:type="uml:OpaqueAction" xmi:id="_yr87UNaFEfCBJ9x1fXma2Q" name="Send updated count to MQTT server" incoming="_zBBW8NaGEfCBJ9x1fXma2Q" outgoing="_zz5lYNaGEfCBJ9x1fXma2Q"/>
+              <node xmi:type="uml:OpaqueAction" xmi:id="_1FSKMNaFEfCBJ9x1fXma2Q" name="Log dispense event to WWW server" incoming="_zz5lYNaGEfCBJ9x1fXma2Q" outgoing="_01BEINaGEfCBJ9x1fXma2Q"/>
+              <node xmi:type="uml:OpaqueAction" xmi:id="_4s5KENaFEfCBJ9x1fXma2Q" name="Display success message to user" incoming="_01BEINaGEfCBJ9x1fXma2Q" outgoing="_2CaEUNaGEfCBJ9x1fXma2Q" inPartition="_jPSdMNZ-EfCBJ9x1fXma2Q"/>
+              <node xmi:type="uml:ActivityFinalNode" xmi:id="_86ADsNaFEfCBJ9x1fXma2Q" incoming="_2CaEUNaGEfCBJ9x1fXma2Q" inPartition="_jPSdMNZ-EfCBJ9x1fXma2Q"/>
+              <node xmi:type="uml:ActivityFinalNode" xmi:id="_FCzW0NaGEfCBJ9x1fXma2Q" incoming="_GmCrMNaGEfCBJ9x1fXma2Q" inPartition="_yJ7QgNZ-EfCBJ9x1fXma2Q"/>
+            </packagedElement>
+          </packagedElement>
+        </packagedElement>
         <packagedElement xmi:type="uml:Package" xmi:id="_IIHxMNVCEfCYZcqbPlE1Ng" name="3 System Context">
           <packagedElement xmi:type="uml:Class" xmi:id="_Er-LsNVIEfCYZcqbPlE1Ng" name="Smart Coffee Capsules Dispenser ">
             <ownedAttribute xmi:type="uml:Property" xmi:id="_fE4uQNVKEfCYZcqbPlE1Ng" name="SS1" type="_yBv9sNVGEfCYZcqbPlE1Ng"/>
@@ -111,6 +231,32 @@
           </packagedElement>
         </packagedElement>
         <packagedElement xmi:type="uml:Package" xmi:id="_LP6BgNVCEfCYZcqbPlE1Ng" name="4 Traceability"/>
+        <packagedElement xmi:type="uml:Package" xmi:id="_VBt_sNaIEfCBJ9x1fXma2Q" name="5 System Behaviour">
+          <packagedElement xmi:type="uml:StateMachine" xmi:id="_XG6xoNaIEfCBJ9x1fXma2Q" name="Dispensing">
+            <region xmi:type="uml:Region" xmi:id="_YPProNaIEfCBJ9x1fXma2Q" name="Region1">
+              <transition xmi:type="uml:Transition" xmi:id="_rKuBsNaJEfCBJ9x1fXma2Q" source="_BURIMNaJEfCBJ9x1fXma2Q" target="_FFzgINaJEfCBJ9x1fXma2Q"/>
+              <transition xmi:type="uml:Transition" xmi:id="_s6k1wNaJEfCBJ9x1fXma2Q" source="_F2zfQNaJEfCBJ9x1fXma2Q" target="_Gqx54NaJEfCBJ9x1fXma2Q"/>
+              <transition xmi:type="uml:Transition" xmi:id="_uHBawNaJEfCBJ9x1fXma2Q" source="_FFzgINaJEfCBJ9x1fXma2Q" target="_F2zfQNaJEfCBJ9x1fXma2Q"/>
+              <transition xmi:type="uml:Transition" xmi:id="_uoPRcNaJEfCBJ9x1fXma2Q" source="_Gqx54NaJEfCBJ9x1fXma2Q" target="_H31i4NaJEfCBJ9x1fXma2Q"/>
+              <transition xmi:type="uml:Transition" xmi:id="_vLr8wNaJEfCBJ9x1fXma2Q" source="_H31i4NaJEfCBJ9x1fXma2Q" target="_JxdW8NaJEfCBJ9x1fXma2Q"/>
+              <transition xmi:type="uml:Transition" xmi:id="_yzM2ANaJEfCBJ9x1fXma2Q" source="_JxdW8NaJEfCBJ9x1fXma2Q" target="_FFzgINaJEfCBJ9x1fXma2Q"/>
+              <transition xmi:type="uml:Transition" xmi:id="_1LYOUNaJEfCBJ9x1fXma2Q" source="_F2zfQNaJEfCBJ9x1fXma2Q" target="_Lm7q0NaJEfCBJ9x1fXma2Q"/>
+              <transition xmi:type="uml:Transition" xmi:id="_3V9PgNaJEfCBJ9x1fXma2Q" source="_Gqx54NaJEfCBJ9x1fXma2Q" target="_Lm7q0NaJEfCBJ9x1fXma2Q"/>
+              <transition xmi:type="uml:Transition" xmi:id="_4LkB0NaJEfCBJ9x1fXma2Q" source="_H31i4NaJEfCBJ9x1fXma2Q" target="_Lm7q0NaJEfCBJ9x1fXma2Q"/>
+              <transition xmi:type="uml:Transition" xmi:id="_8sfPUNaJEfCBJ9x1fXma2Q" source="_Lm7q0NaJEfCBJ9x1fXma2Q" target="_MGQEENaJEfCBJ9x1fXma2Q"/>
+              <transition xmi:type="uml:Transition" xmi:id="_9SCMYNaJEfCBJ9x1fXma2Q" source="_MGQEENaJEfCBJ9x1fXma2Q" target="_CYb68NaJEfCBJ9x1fXma2Q"/>
+              <subvertex xmi:type="uml:Pseudostate" xmi:id="_BURIMNaJEfCBJ9x1fXma2Q"/>
+              <subvertex xmi:type="uml:FinalState" xmi:id="_CYb68NaJEfCBJ9x1fXma2Q"/>
+              <subvertex xmi:type="uml:State" xmi:id="_FFzgINaJEfCBJ9x1fXma2Q" name="Idle"/>
+              <subvertex xmi:type="uml:State" xmi:id="_F2zfQNaJEfCBJ9x1fXma2Q" name="Authenticated"/>
+              <subvertex xmi:type="uml:State" xmi:id="_Gqx54NaJEfCBJ9x1fXma2Q" name="Await Selection"/>
+              <subvertex xmi:type="uml:State" xmi:id="_H31i4NaJEfCBJ9x1fXma2Q" name="Dispense"/>
+              <subvertex xmi:type="uml:State" xmi:id="_JxdW8NaJEfCBJ9x1fXma2Q" name="Update Count"/>
+              <subvertex xmi:type="uml:State" xmi:id="_Lm7q0NaJEfCBJ9x1fXma2Q" name="Error"/>
+              <subvertex xmi:type="uml:State" xmi:id="_MGQEENaJEfCBJ9x1fXma2Q" name="Notify Maintenance"/>
+            </region>
+          </packagedElement>
+        </packagedElement>
       </packagedElement>
     </packagedElement>
     <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_s4HjsNVBEfCYZcqbPlE1Ng">
