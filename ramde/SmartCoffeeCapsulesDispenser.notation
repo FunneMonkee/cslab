@@ -10558,4 +10558,335 @@
       <editedElement xmi:type="elementtypesconfigurations:SpecializationTypeConfiguration" href="platform:/plugin/org.eclipse.papyrus.sysml16.service.types/model/SysML16.elementtypesconfigurations#org.eclipse.papyrus.SysML16.Allocate_Abstraction"/>
     </ownedCellEditorConfigurations>
   </nattable:Table>
+  <notation:Diagram xmi:id="_Rsq9wNb8EfCqp-wohMvF2Q" type="PapyrusUMLStateMachineDiagram" name="Smart Coffee Capsules Dispenser Refill" measurementUnit="Pixel">
+    <children xmi:type="notation:Shape" xmi:id="_Rsq9wdb8EfCqp-wohMvF2Q" type="StateMachine_Shape">
+      <children xmi:type="notation:DecorationNode" xmi:id="_Rsq9wtb8EfCqp-wohMvF2Q" type="StateMachine_NameLabel">
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Rsq9w9b8EfCqp-wohMvF2Q" width="671" height="16"/>
+      </children>
+      <children xmi:type="notation:BasicCompartment" xmi:id="_Rsq9xNb8EfCqp-wohMvF2Q" type="StateMachine_RegionCompartment">
+        <children xmi:type="notation:Shape" xmi:id="_Rsq9xdb8EfCqp-wohMvF2Q" type="Region_Shape">
+          <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_Rsq9xtb8EfCqp-wohMvF2Q" source="RegionAnnotationKey">
+            <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_Rsq9x9b8EfCqp-wohMvF2Q" key="RegionZoneKey" value=""/>
+          </eAnnotations>
+          <children xmi:type="notation:BasicCompartment" xmi:id="_Rsq9yNb8EfCqp-wohMvF2Q" type="Region_SubvertexCompartment">
+            <children xmi:type="notation:Shape" xmi:id="_TMOsANb8EfCqp-wohMvF2Q" type="Pseudostate_InitialShape">
+              <children xmi:type="notation:DecorationNode" xmi:id="_TMOsAtb8EfCqp-wohMvF2Q" type="Pseudostate_InitialFloatingNameLabel">
+                <layoutConstraint xmi:type="notation:Location" xmi:id="_TMOsA9b8EfCqp-wohMvF2Q" x="25" y="3"/>
+              </children>
+              <children xmi:type="notation:DecorationNode" xmi:id="_TMOsBNb8EfCqp-wohMvF2Q" type="Pseudostate_InitialStereotypeLabel">
+                <layoutConstraint xmi:type="notation:Location" xmi:id="_TMOsBdb8EfCqp-wohMvF2Q" x="25" y="-10"/>
+              </children>
+              <element xmi:type="uml:Pseudostate" href="SmartCoffeeCapsulesDispenser.uml#_TMLosNb8EfCqp-wohMvF2Q"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_TMOsAdb8EfCqp-wohMvF2Q" x="29" y="34"/>
+            </children>
+            <children xmi:type="notation:Shape" xmi:id="_UjVo4Nb8EfCqp-wohMvF2Q" type="FinalState_Shape">
+              <children xmi:type="notation:DecorationNode" xmi:id="_UjWP8Nb8EfCqp-wohMvF2Q" type="FinalState_FloatingNameLabel">
+                <layoutConstraint xmi:type="notation:Location" xmi:id="_UjWP8db8EfCqp-wohMvF2Q" x="25" y="3"/>
+              </children>
+              <children xmi:type="notation:DecorationNode" xmi:id="_UjWP8tb8EfCqp-wohMvF2Q" type="FinalState_StereotypeLabel">
+                <layoutConstraint xmi:type="notation:Location" xmi:id="_UjWP89b8EfCqp-wohMvF2Q" x="25" y="-10"/>
+              </children>
+              <element xmi:type="uml:FinalState" href="SmartCoffeeCapsulesDispenser.uml#_UjSlkNb8EfCqp-wohMvF2Q"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_UjVo4db8EfCqp-wohMvF2Q" x="609" y="34"/>
+            </children>
+            <children xmi:type="notation:Shape" xmi:id="_fiKt8Nb8EfCqp-wohMvF2Q" type="State_Shape">
+              <children xmi:type="notation:DecorationNode" xmi:id="_fiLVANb8EfCqp-wohMvF2Q" type="State_NameLabel">
+                <layoutConstraint xmi:type="notation:Bounds" xmi:id="_fiQNgNb8EfCqp-wohMvF2Q" width="61" height="16"/>
+              </children>
+              <children xmi:type="notation:DecorationNode" xmi:id="_fiLVAdb8EfCqp-wohMvF2Q" type="State_FloatingNameLabel">
+                <layoutConstraint xmi:type="notation:Location" xmi:id="_fiLVAtb8EfCqp-wohMvF2Q" x="40"/>
+              </children>
+              <children xmi:type="notation:BasicCompartment" xmi:id="_fiLVA9b8EfCqp-wohMvF2Q" type="State_RegionCompartment">
+                <layoutConstraint xmi:type="notation:Bounds" xmi:id="_fiLVBNb8EfCqp-wohMvF2Q" y="16" width="61" height="5"/>
+              </children>
+              <element xmi:type="uml:State" href="SmartCoffeeCapsulesDispenser.uml#_evRRYNb8EfCqp-wohMvF2Q"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_fiKt8db8EfCqp-wohMvF2Q" x="109" y="34" width="61" height="21"/>
+            </children>
+            <children xmi:type="notation:Shape" xmi:id="_fiRboNb8EfCqp-wohMvF2Q" type="State_Shape">
+              <children xmi:type="notation:DecorationNode" xmi:id="_fiRbotb8EfCqp-wohMvF2Q" type="State_NameLabel">
+                <layoutConstraint xmi:type="notation:Bounds" xmi:id="_fiWUINb8EfCqp-wohMvF2Q" width="74" height="16"/>
+              </children>
+              <children xmi:type="notation:DecorationNode" xmi:id="_fiRbo9b8EfCqp-wohMvF2Q" type="State_FloatingNameLabel">
+                <layoutConstraint xmi:type="notation:Location" xmi:id="_fiRbpNb8EfCqp-wohMvF2Q" x="40"/>
+              </children>
+              <children xmi:type="notation:BasicCompartment" xmi:id="_fiRbpdb8EfCqp-wohMvF2Q" type="State_RegionCompartment">
+                <layoutConstraint xmi:type="notation:Bounds" xmi:id="_fiRbptb8EfCqp-wohMvF2Q" y="16" width="74" height="0"/>
+              </children>
+              <element xmi:type="uml:State" href="SmartCoffeeCapsulesDispenser.uml#_evSfgNb8EfCqp-wohMvF2Q"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_fiRbodb8EfCqp-wohMvF2Q" x="189" y="34" width="74" height="16"/>
+            </children>
+            <children xmi:type="notation:Shape" xmi:id="_fiW7MNb8EfCqp-wohMvF2Q" type="State_Shape">
+              <children xmi:type="notation:DecorationNode" xmi:id="_fiW7Mtb8EfCqp-wohMvF2Q" type="State_NameLabel">
+                <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ficawNb8EfCqp-wohMvF2Q" width="80" height="16"/>
+              </children>
+              <children xmi:type="notation:DecorationNode" xmi:id="_fiW7M9b8EfCqp-wohMvF2Q" type="State_FloatingNameLabel">
+                <layoutConstraint xmi:type="notation:Location" xmi:id="_fiW7NNb8EfCqp-wohMvF2Q" x="40"/>
+              </children>
+              <children xmi:type="notation:BasicCompartment" xmi:id="_fiW7Ndb8EfCqp-wohMvF2Q" type="State_RegionCompartment">
+                <layoutConstraint xmi:type="notation:Bounds" xmi:id="_fiW7Ntb8EfCqp-wohMvF2Q" y="16" width="80" height="0"/>
+              </children>
+              <element xmi:type="uml:State" href="SmartCoffeeCapsulesDispenser.uml#_evTGkNb8EfCqp-wohMvF2Q"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_fiW7Mdb8EfCqp-wohMvF2Q" x="289" y="34" width="80" height="16"/>
+            </children>
+            <children xmi:type="notation:Shape" xmi:id="_fidB0Nb8EfCqp-wohMvF2Q" type="State_Shape">
+              <children xmi:type="notation:DecorationNode" xmi:id="_fidB0tb8EfCqp-wohMvF2Q" type="State_NameLabel">
+                <layoutConstraint xmi:type="notation:Bounds" xmi:id="_fih6UNb8EfCqp-wohMvF2Q" width="60" height="16"/>
+              </children>
+              <children xmi:type="notation:DecorationNode" xmi:id="_fidB09b8EfCqp-wohMvF2Q" type="State_FloatingNameLabel">
+                <layoutConstraint xmi:type="notation:Location" xmi:id="_fidB1Nb8EfCqp-wohMvF2Q" x="40"/>
+              </children>
+              <children xmi:type="notation:BasicCompartment" xmi:id="_fidB1db8EfCqp-wohMvF2Q" type="State_RegionCompartment">
+                <layoutConstraint xmi:type="notation:Bounds" xmi:id="_fidB1tb8EfCqp-wohMvF2Q" y="16" width="60" height="0"/>
+              </children>
+              <element xmi:type="uml:State" href="SmartCoffeeCapsulesDispenser.uml#_evTtoNb8EfCqp-wohMvF2Q"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_fidB0db8EfCqp-wohMvF2Q" x="389" y="34" width="60" height="16"/>
+            </children>
+            <children xmi:type="notation:Shape" xmi:id="_fiihYNb8EfCqp-wohMvF2Q" type="State_Shape">
+              <children xmi:type="notation:DecorationNode" xmi:id="_fiihYtb8EfCqp-wohMvF2Q" type="State_NameLabel">
+                <layoutConstraint xmi:type="notation:Bounds" xmi:id="_fioA8Nb8EfCqp-wohMvF2Q" width="74" height="16"/>
+              </children>
+              <children xmi:type="notation:DecorationNode" xmi:id="_fiihY9b8EfCqp-wohMvF2Q" type="State_FloatingNameLabel">
+                <layoutConstraint xmi:type="notation:Location" xmi:id="_fiihZNb8EfCqp-wohMvF2Q" x="40"/>
+              </children>
+              <children xmi:type="notation:BasicCompartment" xmi:id="_fiihZdb8EfCqp-wohMvF2Q" type="State_RegionCompartment">
+                <layoutConstraint xmi:type="notation:Bounds" xmi:id="_fiihZtb8EfCqp-wohMvF2Q" y="16" width="74" height="0"/>
+              </children>
+              <element xmi:type="uml:State" href="SmartCoffeeCapsulesDispenser.uml#_evTtodb8EfCqp-wohMvF2Q"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_fiihYdb8EfCqp-wohMvF2Q" x="469" y="34" width="74" height="16"/>
+            </children>
+            <children xmi:type="notation:Shape" xmi:id="_fiooANb8EfCqp-wohMvF2Q" type="State_Shape">
+              <children xmi:type="notation:DecorationNode" xmi:id="_fiooAtb8EfCqp-wohMvF2Q" type="State_NameLabel">
+                <layoutConstraint xmi:type="notation:Bounds" xmi:id="_fiuHkNb8EfCqp-wohMvF2Q" width="60" height="16"/>
+              </children>
+              <children xmi:type="notation:DecorationNode" xmi:id="_fiooA9b8EfCqp-wohMvF2Q" type="State_FloatingNameLabel">
+                <layoutConstraint xmi:type="notation:Location" xmi:id="_fiooBNb8EfCqp-wohMvF2Q" x="40"/>
+              </children>
+              <children xmi:type="notation:BasicCompartment" xmi:id="_fiooBdb8EfCqp-wohMvF2Q" type="State_RegionCompartment">
+                <layoutConstraint xmi:type="notation:Bounds" xmi:id="_fiooBtb8EfCqp-wohMvF2Q" y="16" width="60" height="0"/>
+              </children>
+              <element xmi:type="uml:State" href="SmartCoffeeCapsulesDispenser.uml#_evUUsNb8EfCqp-wohMvF2Q"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_fiooAdb8EfCqp-wohMvF2Q" x="209" y="94" width="60" height="16"/>
+            </children>
+            <children xmi:type="notation:Shape" xmi:id="_fiuuoNb8EfCqp-wohMvF2Q" type="State_Shape">
+              <children xmi:type="notation:DecorationNode" xmi:id="_fiuuotb8EfCqp-wohMvF2Q" type="State_NameLabel">
+                <layoutConstraint xmi:type="notation:Bounds" xmi:id="_fi01QNb8EfCqp-wohMvF2Q" width="98" height="16"/>
+              </children>
+              <children xmi:type="notation:DecorationNode" xmi:id="_fiuuo9b8EfCqp-wohMvF2Q" type="State_FloatingNameLabel">
+                <layoutConstraint xmi:type="notation:Location" xmi:id="_fiuupNb8EfCqp-wohMvF2Q" x="40"/>
+              </children>
+              <children xmi:type="notation:BasicCompartment" xmi:id="_fiuupdb8EfCqp-wohMvF2Q" type="State_RegionCompartment">
+                <layoutConstraint xmi:type="notation:Bounds" xmi:id="_fiuuptb8EfCqp-wohMvF2Q" y="16" width="98" height="0"/>
+              </children>
+              <element xmi:type="uml:State" href="SmartCoffeeCapsulesDispenser.uml#_evUUsdb8EfCqp-wohMvF2Q"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_fiuuodb8EfCqp-wohMvF2Q" x="369" y="94" width="98" height="16"/>
+            </children>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Rsq9ydb8EfCqp-wohMvF2Q"/>
+          </children>
+          <element xmi:type="uml:Region" href="SmartCoffeeCapsulesDispenser.uml#_RsqWsNb8EfCqp-wohMvF2Q"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Rsq9ytb8EfCqp-wohMvF2Q" width="671" height="135"/>
+        </children>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Rsq9y9b8EfCqp-wohMvF2Q" y="16" width="671" height="135"/>
+      </children>
+      <element xmi:type="uml:StateMachine" href="SmartCoffeeCapsulesDispenser.uml#_PbtnwNb8EfCqp-wohMvF2Q"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Rsq9zNb8EfCqp-wohMvF2Q" x="30" y="30" width="671" height="151"/>
+    </children>
+    <styles xmi:type="notation:StringValueStyle" xmi:id="_Rsq9zdb8EfCqp-wohMvF2Q" name="diagram_compatibility_version" stringValue="1.4.0"/>
+    <styles xmi:type="notation:DiagramStyle" xmi:id="_Rsq9ztb8EfCqp-wohMvF2Q"/>
+    <styles xmi:type="style:PapyrusDiagramStyle" xmi:id="_Rsq9z9b8EfCqp-wohMvF2Q" diagramKindId="org.eclipse.papyrus.sysml16.diagram.stateMachine">
+      <owner xmi:type="uml:Package" href="SmartCoffeeCapsulesDispenser.uml#_VBt_sNaIEfCBJ9x1fXma2Q"/>
+    </styles>
+    <element xmi:type="uml:StateMachine" href="SmartCoffeeCapsulesDispenser.uml#_PbtnwNb8EfCqp-wohMvF2Q"/>
+    <edges xmi:type="notation:Connector" xmi:id="_tbeAENb8EfCqp-wohMvF2Q" type="Transition_Edge" source="_TMOsANb8EfCqp-wohMvF2Q" target="_fiKt8Nb8EfCqp-wohMvF2Q">
+      <children xmi:type="notation:DecorationNode" xmi:id="_tbenINb8EfCqp-wohMvF2Q" type="Transition_NameLabel">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_tbenIdb8EfCqp-wohMvF2Q" y="20"/>
+      </children>
+      <children xmi:type="notation:DecorationNode" xmi:id="_tbenItb8EfCqp-wohMvF2Q" type="Transition_GuardLabel">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_tbenI9b8EfCqp-wohMvF2Q" y="-20"/>
+      </children>
+      <children xmi:type="notation:DecorationNode" xmi:id="_tbenJNb8EfCqp-wohMvF2Q" type="Transition_StereotypeLabel">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_tbenJdb8EfCqp-wohMvF2Q" y="60"/>
+      </children>
+      <styles xmi:type="notation:FontStyle" xmi:id="_tbeAEdb8EfCqp-wohMvF2Q"/>
+      <element xmi:type="uml:Transition" href="SmartCoffeeCapsulesDispenser.uml#_taDDwNb8EfCqp-wohMvF2Q"/>
+      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_tbeAEtb8EfCqp-wohMvF2Q" points="[61, 94, -643984, -643984]$[160, 80, -643984, -643984]"/>
+      <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_tbqNUNb8EfCqp-wohMvF2Q" id="(0.09333333333333335,0.7433333333333337)"/>
+      <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_tbqNUdb8EfCqp-wohMvF2Q" id="(0.32786885245901637,0.0)"/>
+    </edges>
+    <edges xmi:type="notation:Connector" xmi:id="_t7m4sNb8EfCqp-wohMvF2Q" type="Transition_Edge" source="_fiKt8Nb8EfCqp-wohMvF2Q" target="_fiRboNb8EfCqp-wohMvF2Q">
+      <children xmi:type="notation:DecorationNode" xmi:id="_t7m4s9b8EfCqp-wohMvF2Q" type="Transition_NameLabel">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_t7m4tNb8EfCqp-wohMvF2Q" y="20"/>
+      </children>
+      <children xmi:type="notation:DecorationNode" xmi:id="_t7m4tdb8EfCqp-wohMvF2Q" type="Transition_GuardLabel">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_t7m4ttb8EfCqp-wohMvF2Q" y="-20"/>
+      </children>
+      <children xmi:type="notation:DecorationNode" xmi:id="_t7m4t9b8EfCqp-wohMvF2Q" type="Transition_StereotypeLabel">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_t7m4uNb8EfCqp-wohMvF2Q" y="60"/>
+      </children>
+      <styles xmi:type="notation:FontStyle" xmi:id="_t7m4sdb8EfCqp-wohMvF2Q"/>
+      <element xmi:type="uml:Transition" href="SmartCoffeeCapsulesDispenser.uml#_t7bSgNb8EfCqp-wohMvF2Q"/>
+      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_t7m4stb8EfCqp-wohMvF2Q" points="[200, 85, -643984, -643984]$[230, 80, -643984, -643984]"/>
+      <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_t7ztANb8EfCqp-wohMvF2Q" id="(0.9836065573770492,0.23809523809523808)"/>
+      <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_t7ztAdb8EfCqp-wohMvF2Q" id="(0.13513513513513514,0.0)"/>
+    </edges>
+    <edges xmi:type="notation:Connector" xmi:id="_ukVsoNb8EfCqp-wohMvF2Q" type="Transition_Edge" source="_fiRboNb8EfCqp-wohMvF2Q" target="_fiW7MNb8EfCqp-wohMvF2Q">
+      <children xmi:type="notation:DecorationNode" xmi:id="_ukVso9b8EfCqp-wohMvF2Q" type="Transition_NameLabel">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_ukVspNb8EfCqp-wohMvF2Q" y="20"/>
+      </children>
+      <children xmi:type="notation:DecorationNode" xmi:id="_ukVspdb8EfCqp-wohMvF2Q" type="Transition_GuardLabel">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_ukVsptb8EfCqp-wohMvF2Q" y="-20"/>
+      </children>
+      <children xmi:type="notation:DecorationNode" xmi:id="_ukVsp9b8EfCqp-wohMvF2Q" type="Transition_StereotypeLabel">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_ukVsqNb8EfCqp-wohMvF2Q" y="60"/>
+      </children>
+      <styles xmi:type="notation:FontStyle" xmi:id="_ukVsodb8EfCqp-wohMvF2Q"/>
+      <element xmi:type="uml:Transition" href="SmartCoffeeCapsulesDispenser.uml#_ukJfYNb8EfCqp-wohMvF2Q"/>
+      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ukVsotb8EfCqp-wohMvF2Q" points="[284, 80, -643984, -643984]$[320, 88, -643984, -643984]"/>
+      <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ukh54Nb8EfCqp-wohMvF2Q" id="(0.8648648648648649,0.0)"/>
+      <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ukh54db8EfCqp-wohMvF2Q" id="(0.0,0.5)"/>
+    </edges>
+    <edges xmi:type="notation:Connector" xmi:id="_vGLOYNb8EfCqp-wohMvF2Q" type="Transition_Edge" source="_fiW7MNb8EfCqp-wohMvF2Q" target="_fidB0Nb8EfCqp-wohMvF2Q">
+      <children xmi:type="notation:DecorationNode" xmi:id="_vGLOY9b8EfCqp-wohMvF2Q" type="Transition_NameLabel">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_vGLOZNb8EfCqp-wohMvF2Q" y="20"/>
+      </children>
+      <children xmi:type="notation:DecorationNode" xmi:id="_vGLOZdb8EfCqp-wohMvF2Q" type="Transition_GuardLabel">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_vGLOZtb8EfCqp-wohMvF2Q" y="-20"/>
+      </children>
+      <children xmi:type="notation:DecorationNode" xmi:id="_vGLOZ9b8EfCqp-wohMvF2Q" type="Transition_StereotypeLabel">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_vGLOaNb8EfCqp-wohMvF2Q" y="60"/>
+      </children>
+      <styles xmi:type="notation:FontStyle" xmi:id="_vGLOYdb8EfCqp-wohMvF2Q"/>
+      <element xmi:type="uml:Transition" href="SmartCoffeeCapsulesDispenser.uml#_vF_BINb8EfCqp-wohMvF2Q"/>
+      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_vGLOYtb8EfCqp-wohMvF2Q" points="[390, 80, -643984, -643984]$[420, 88, -643984, -643984]"/>
+      <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_vGW0kNb8EfCqp-wohMvF2Q" id="(0.875,0.0)"/>
+      <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_vGW0kdb8EfCqp-wohMvF2Q" id="(0.0,0.5)"/>
+    </edges>
+    <edges xmi:type="notation:Connector" xmi:id="_vjRaENb8EfCqp-wohMvF2Q" type="Transition_Edge" source="_fidB0Nb8EfCqp-wohMvF2Q" target="_fiihYNb8EfCqp-wohMvF2Q">
+      <children xmi:type="notation:DecorationNode" xmi:id="_vjRaE9b8EfCqp-wohMvF2Q" type="Transition_NameLabel">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_vjRaFNb8EfCqp-wohMvF2Q" y="20"/>
+      </children>
+      <children xmi:type="notation:DecorationNode" xmi:id="_vjRaFdb8EfCqp-wohMvF2Q" type="Transition_GuardLabel">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_vjRaFtb8EfCqp-wohMvF2Q" y="-20"/>
+      </children>
+      <children xmi:type="notation:DecorationNode" xmi:id="_vjRaF9b8EfCqp-wohMvF2Q" type="Transition_StereotypeLabel">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_vjRaGNb8EfCqp-wohMvF2Q" y="60"/>
+      </children>
+      <styles xmi:type="notation:FontStyle" xmi:id="_vjRaEdb8EfCqp-wohMvF2Q"/>
+      <element xmi:type="uml:Transition" href="SmartCoffeeCapsulesDispenser.uml#_vjFM0Nb8EfCqp-wohMvF2Q"/>
+      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_vjRaEtb8EfCqp-wohMvF2Q" points="[470, 80, -643984, -643984]$[500, 88, -643984, -643984]"/>
+      <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_vjdnUNb8EfCqp-wohMvF2Q" id="(0.8333333333333334,0.0)"/>
+      <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_vjdnUdb8EfCqp-wohMvF2Q" id="(0.0,0.5)"/>
+    </edges>
+    <edges xmi:type="notation:Connector" xmi:id="_wJ5VMNb8EfCqp-wohMvF2Q" type="Transition_Edge" source="_fiihYNb8EfCqp-wohMvF2Q" target="_UjVo4Nb8EfCqp-wohMvF2Q">
+      <children xmi:type="notation:DecorationNode" xmi:id="_wJ58QNb8EfCqp-wohMvF2Q" type="Transition_NameLabel">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_wJ58Qdb8EfCqp-wohMvF2Q" y="20"/>
+      </children>
+      <children xmi:type="notation:DecorationNode" xmi:id="_wJ58Qtb8EfCqp-wohMvF2Q" type="Transition_GuardLabel">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_wJ58Q9b8EfCqp-wohMvF2Q" y="-20"/>
+      </children>
+      <children xmi:type="notation:DecorationNode" xmi:id="_wJ58RNb8EfCqp-wohMvF2Q" type="Transition_StereotypeLabel">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_wJ58Rdb8EfCqp-wohMvF2Q" y="60"/>
+      </children>
+      <styles xmi:type="notation:FontStyle" xmi:id="_wJ5VMdb8EfCqp-wohMvF2Q"/>
+      <element xmi:type="uml:Transition" href="SmartCoffeeCapsulesDispenser.uml#_wJtH8Nb8EfCqp-wohMvF2Q"/>
+      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_wJ5VMtb8EfCqp-wohMvF2Q" points="[564, 80, -643984, -643984]$[641, 86, -643984, -643984]"/>
+      <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_wKE7YNb8EfCqp-wohMvF2Q" id="(0.8648648648648649,0.0)"/>
+      <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_wKE7Ydb8EfCqp-wohMvF2Q" id="(0.05,0.3368750000000006)"/>
+    </edges>
+    <edges xmi:type="notation:Connector" xmi:id="_w8IDYNb8EfCqp-wohMvF2Q" type="Transition_Edge" source="_fiRboNb8EfCqp-wohMvF2Q" target="_fiooANb8EfCqp-wohMvF2Q">
+      <children xmi:type="notation:DecorationNode" xmi:id="_w8IDY9b8EfCqp-wohMvF2Q" type="Transition_NameLabel">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_w8IDZNb8EfCqp-wohMvF2Q" y="20"/>
+      </children>
+      <children xmi:type="notation:DecorationNode" xmi:id="_w8IDZdb8EfCqp-wohMvF2Q" type="Transition_GuardLabel">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_w8IqcNb8EfCqp-wohMvF2Q" y="-20"/>
+      </children>
+      <children xmi:type="notation:DecorationNode" xmi:id="_w8Iqcdb8EfCqp-wohMvF2Q" type="Transition_StereotypeLabel">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_w8Iqctb8EfCqp-wohMvF2Q" y="60"/>
+      </children>
+      <styles xmi:type="notation:FontStyle" xmi:id="_w8IDYdb8EfCqp-wohMvF2Q"/>
+      <element xmi:type="uml:Transition" href="SmartCoffeeCapsulesDispenser.uml#_w78dMNb8EfCqp-wohMvF2Q"/>
+      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_w8IDYtb8EfCqp-wohMvF2Q" points="[280, 80, -643984, -643984]$[280, 140, -643984, -643984]"/>
+      <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_w8TpkNb8EfCqp-wohMvF2Q" id="(0.8108108108108109,0.0)"/>
+      <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_w8Tpkdb8EfCqp-wohMvF2Q" id="(0.6666666666666666,0.0)"/>
+    </edges>
+    <edges xmi:type="notation:Connector" xmi:id="_xdUE4Nb8EfCqp-wohMvF2Q" type="Transition_Edge" source="_fiW7MNb8EfCqp-wohMvF2Q" target="_fiooANb8EfCqp-wohMvF2Q">
+      <children xmi:type="notation:DecorationNode" xmi:id="_xdUE49b8EfCqp-wohMvF2Q" type="Transition_NameLabel">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_xdUE5Nb8EfCqp-wohMvF2Q" y="20"/>
+      </children>
+      <children xmi:type="notation:DecorationNode" xmi:id="_xdUE5db8EfCqp-wohMvF2Q" type="Transition_GuardLabel">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_xdUE5tb8EfCqp-wohMvF2Q" y="-20"/>
+      </children>
+      <children xmi:type="notation:DecorationNode" xmi:id="_xdUr8Nb8EfCqp-wohMvF2Q" type="Transition_StereotypeLabel">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_xdUr8db8EfCqp-wohMvF2Q" y="60"/>
+      </children>
+      <styles xmi:type="notation:FontStyle" xmi:id="_xdUE4db8EfCqp-wohMvF2Q"/>
+      <element xmi:type="uml:Transition" href="SmartCoffeeCapsulesDispenser.uml#_xdKT4Nb8EfCqp-wohMvF2Q"/>
+      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_xdUE4tb8EfCqp-wohMvF2Q" points="[330, 80, -643984, -643984]$[290, 140, -643984, -643984]"/>
+      <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_xdgSINb8EfCqp-wohMvF2Q" id="(0.125,0.0)"/>
+      <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_xdgSIdb8EfCqp-wohMvF2Q" id="(0.8333333333333334,0.0)"/>
+    </edges>
+    <edges xmi:type="notation:Connector" xmi:id="_zMwpQNb8EfCqp-wohMvF2Q" type="Transition_Edge" source="_fidB0Nb8EfCqp-wohMvF2Q" target="_fiooANb8EfCqp-wohMvF2Q">
+      <children xmi:type="notation:DecorationNode" xmi:id="_zMwpQ9b8EfCqp-wohMvF2Q" type="Transition_NameLabel">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_zMwpRNb8EfCqp-wohMvF2Q" y="20"/>
+      </children>
+      <children xmi:type="notation:DecorationNode" xmi:id="_zMwpRdb8EfCqp-wohMvF2Q" type="Transition_GuardLabel">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_zMwpRtb8EfCqp-wohMvF2Q" y="-20"/>
+      </children>
+      <children xmi:type="notation:DecorationNode" xmi:id="_zMwpR9b8EfCqp-wohMvF2Q" type="Transition_StereotypeLabel">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_zMwpSNb8EfCqp-wohMvF2Q" y="60"/>
+      </children>
+      <styles xmi:type="notation:FontStyle" xmi:id="_zMwpQdb8EfCqp-wohMvF2Q"/>
+      <element xmi:type="uml:Transition" href="SmartCoffeeCapsulesDispenser.uml#_zMlDENb8EfCqp-wohMvF2Q"/>
+      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_zMwpQtb8EfCqp-wohMvF2Q" points="[440, 96, -643984, -643984]$[290, 140, -643984, -643984]"/>
+      <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_zM8PcNb8EfCqp-wohMvF2Q" id="(0.3333333333333333,1.0)"/>
+      <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_zM8Pcdb8EfCqp-wohMvF2Q" id="(0.8333333333333334,0.0)"/>
+    </edges>
+    <edges xmi:type="notation:Connector" xmi:id="_z_pewNb8EfCqp-wohMvF2Q" type="Transition_Edge" source="_fiihYNb8EfCqp-wohMvF2Q" target="_fiooANb8EfCqp-wohMvF2Q">
+      <children xmi:type="notation:DecorationNode" xmi:id="_z_pew9b8EfCqp-wohMvF2Q" type="Transition_NameLabel">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_z_qF0Nb8EfCqp-wohMvF2Q" y="20"/>
+      </children>
+      <children xmi:type="notation:DecorationNode" xmi:id="_z_qF0db8EfCqp-wohMvF2Q" type="Transition_GuardLabel">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_z_qF0tb8EfCqp-wohMvF2Q" y="-20"/>
+      </children>
+      <children xmi:type="notation:DecorationNode" xmi:id="_z_qF09b8EfCqp-wohMvF2Q" type="Transition_StereotypeLabel">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_z_qF1Nb8EfCqp-wohMvF2Q" y="60"/>
+      </children>
+      <styles xmi:type="notation:FontStyle" xmi:id="_z_pewdb8EfCqp-wohMvF2Q"/>
+      <element xmi:type="uml:Transition" href="SmartCoffeeCapsulesDispenser.uml#_z_cqcNb8EfCqp-wohMvF2Q"/>
+      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_z_pewtb8EfCqp-wohMvF2Q" points="[500, 88, -643984, -643984]$[300, 148, -643984, -643984]"/>
+      <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_z_1E8Nb8EfCqp-wohMvF2Q" id="(0.0,0.5)"/>
+      <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_z_1E8db8EfCqp-wohMvF2Q" id="(1.0,0.5)"/>
+    </edges>
+    <edges xmi:type="notation:Connector" xmi:id="_LgWwANb9EfCqp-wohMvF2Q" type="Transition_Edge" source="_fiooANb8EfCqp-wohMvF2Q" target="_fiuuoNb8EfCqp-wohMvF2Q">
+      <children xmi:type="notation:DecorationNode" xmi:id="_LgWwA9b9EfCqp-wohMvF2Q" type="Transition_NameLabel">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_LgXXENb9EfCqp-wohMvF2Q" y="20"/>
+      </children>
+      <children xmi:type="notation:DecorationNode" xmi:id="_LgXXEdb9EfCqp-wohMvF2Q" type="Transition_GuardLabel">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_LgXXEtb9EfCqp-wohMvF2Q" y="-20"/>
+      </children>
+      <children xmi:type="notation:DecorationNode" xmi:id="_LgXXE9b9EfCqp-wohMvF2Q" type="Transition_StereotypeLabel">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_LgXXFNb9EfCqp-wohMvF2Q" y="60"/>
+      </children>
+      <styles xmi:type="notation:FontStyle" xmi:id="_LgWwAdb9EfCqp-wohMvF2Q"/>
+      <element xmi:type="uml:Transition" href="SmartCoffeeCapsulesDispenser.uml#_LgDOANb9EfCqp-wohMvF2Q"/>
+      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_LgWwAtb9EfCqp-wohMvF2Q" points="[290, 140, -643984, -643984]$[410, 140, -643984, -643984]"/>
+      <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_LgjkUNb9EfCqp-wohMvF2Q" id="(0.8333333333333334,0.0)"/>
+      <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_LgjkUdb9EfCqp-wohMvF2Q" id="(0.10204081632653061,0.0)"/>
+    </edges>
+    <edges xmi:type="notation:Connector" xmi:id="_MGimQNb9EfCqp-wohMvF2Q" type="Transition_Edge" source="_fiuuoNb8EfCqp-wohMvF2Q" target="_UjVo4Nb8EfCqp-wohMvF2Q">
+      <children xmi:type="notation:DecorationNode" xmi:id="_MGimQ9b9EfCqp-wohMvF2Q" type="Transition_NameLabel">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_MGjNUNb9EfCqp-wohMvF2Q" y="20"/>
+      </children>
+      <children xmi:type="notation:DecorationNode" xmi:id="_MGjNUdb9EfCqp-wohMvF2Q" type="Transition_GuardLabel">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_MGjNUtb9EfCqp-wohMvF2Q" y="-20"/>
+      </children>
+      <children xmi:type="notation:DecorationNode" xmi:id="_MGjNU9b9EfCqp-wohMvF2Q" type="Transition_StereotypeLabel">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_MGjNVNb9EfCqp-wohMvF2Q" y="60"/>
+      </children>
+      <styles xmi:type="notation:FontStyle" xmi:id="_MGimQdb9EfCqp-wohMvF2Q"/>
+      <element xmi:type="uml:Transition" href="SmartCoffeeCapsulesDispenser.uml#_MGVx8Nb9EfCqp-wohMvF2Q"/>
+      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_MGimQtb9EfCqp-wohMvF2Q" points="[488, 140, -643984, -643984]$[640, 91, -643984, -643984]"/>
+      <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_MGtlYNb9EfCqp-wohMvF2Q" id="(0.8979591836734694,0.0)"/>
+      <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_MGtlYdb9EfCqp-wohMvF2Q" id="(0.04875346260388369,0.5975069252077567)"/>
+    </edges>
+  </notation:Diagram>
 </xmi:XMI>

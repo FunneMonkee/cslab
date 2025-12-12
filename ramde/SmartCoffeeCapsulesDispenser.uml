@@ -268,6 +268,31 @@
               <subvertex xmi:type="uml:State" xmi:id="_MGQEENaJEfCBJ9x1fXma2Q" name="Notify Maintenance"/>
             </region>
           </packagedElement>
+          <packagedElement xmi:type="uml:StateMachine" xmi:id="_PbtnwNb8EfCqp-wohMvF2Q" name="Refilling">
+            <region xmi:type="uml:Region" xmi:id="_RsqWsNb8EfCqp-wohMvF2Q" name="Region1">
+              <transition xmi:type="uml:Transition" xmi:id="_taDDwNb8EfCqp-wohMvF2Q" source="_TMLosNb8EfCqp-wohMvF2Q" target="_evRRYNb8EfCqp-wohMvF2Q"/>
+              <transition xmi:type="uml:Transition" xmi:id="_t7bSgNb8EfCqp-wohMvF2Q" source="_evRRYNb8EfCqp-wohMvF2Q" target="_evSfgNb8EfCqp-wohMvF2Q"/>
+              <transition xmi:type="uml:Transition" xmi:id="_ukJfYNb8EfCqp-wohMvF2Q" source="_evSfgNb8EfCqp-wohMvF2Q" target="_evTGkNb8EfCqp-wohMvF2Q"/>
+              <transition xmi:type="uml:Transition" xmi:id="_vF_BINb8EfCqp-wohMvF2Q" source="_evTGkNb8EfCqp-wohMvF2Q" target="_evTtoNb8EfCqp-wohMvF2Q"/>
+              <transition xmi:type="uml:Transition" xmi:id="_vjFM0Nb8EfCqp-wohMvF2Q" source="_evTtoNb8EfCqp-wohMvF2Q" target="_evTtodb8EfCqp-wohMvF2Q"/>
+              <transition xmi:type="uml:Transition" xmi:id="_wJtH8Nb8EfCqp-wohMvF2Q" source="_evTtodb8EfCqp-wohMvF2Q" target="_UjSlkNb8EfCqp-wohMvF2Q"/>
+              <transition xmi:type="uml:Transition" xmi:id="_w78dMNb8EfCqp-wohMvF2Q" source="_evSfgNb8EfCqp-wohMvF2Q" target="_evUUsNb8EfCqp-wohMvF2Q"/>
+              <transition xmi:type="uml:Transition" xmi:id="_xdKT4Nb8EfCqp-wohMvF2Q" source="_evTGkNb8EfCqp-wohMvF2Q" target="_evUUsNb8EfCqp-wohMvF2Q"/>
+              <transition xmi:type="uml:Transition" xmi:id="_zMlDENb8EfCqp-wohMvF2Q" source="_evTtoNb8EfCqp-wohMvF2Q" target="_evUUsNb8EfCqp-wohMvF2Q"/>
+              <transition xmi:type="uml:Transition" xmi:id="_z_cqcNb8EfCqp-wohMvF2Q" source="_evTtodb8EfCqp-wohMvF2Q" target="_evUUsNb8EfCqp-wohMvF2Q"/>
+              <transition xmi:type="uml:Transition" xmi:id="_LgDOANb9EfCqp-wohMvF2Q" source="_evUUsNb8EfCqp-wohMvF2Q" target="_evUUsdb8EfCqp-wohMvF2Q"/>
+              <transition xmi:type="uml:Transition" xmi:id="_MGVx8Nb9EfCqp-wohMvF2Q" source="_evUUsdb8EfCqp-wohMvF2Q" target="_UjSlkNb8EfCqp-wohMvF2Q"/>
+              <subvertex xmi:type="uml:Pseudostate" xmi:id="_TMLosNb8EfCqp-wohMvF2Q" name=""/>
+              <subvertex xmi:type="uml:FinalState" xmi:id="_UjSlkNb8EfCqp-wohMvF2Q"/>
+              <subvertex xmi:type="uml:State" xmi:id="_evRRYNb8EfCqp-wohMvF2Q" name="Idle"/>
+              <subvertex xmi:type="uml:State" xmi:id="_evSfgNb8EfCqp-wohMvF2Q" name="Authenticated"/>
+              <subvertex xmi:type="uml:State" xmi:id="_evTGkNb8EfCqp-wohMvF2Q" name="Open"/>
+              <subvertex xmi:type="uml:State" xmi:id="_evTtoNb8EfCqp-wohMvF2Q" name="Refilled"/>
+              <subvertex xmi:type="uml:State" xmi:id="_evTtodb8EfCqp-wohMvF2Q" name="Closed"/>
+              <subvertex xmi:type="uml:State" xmi:id="_evUUsNb8EfCqp-wohMvF2Q" name="Error"/>
+              <subvertex xmi:type="uml:State" xmi:id="_evUUsdb8EfCqp-wohMvF2Q" name="Notify Maintenance"/>
+            </region>
+          </packagedElement>
         </packagedElement>
       </packagedElement>
       <packagedElement xmi:type="uml:Package" xmi:id="_X0X0ENa1EfCBJ9x1fXma2Q" name="2 White Box">
@@ -717,6 +742,12 @@
         <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/uml2/5.0.0/UML/Profile/Standard#/"/>
       </eAnnotations>
       <appliedProfile xmi:type="uml:Profile" href="pathmap://UML_PROFILES/Standard.profile.uml#_0"/>
+    </profileApplication>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_c5RZENb8EfCqp-wohMvF2Q">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_c5UcYNb8EfCqp-wohMvF2Q" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://PAPYRUS_ACTIONLANGUAGE_PROFILE/ActionLanguage-Profile.profile.uml#_Kv8EIKFXEeS_KNX0nfvIVQ"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://PAPYRUS_ACTIONLANGUAGE_PROFILE/ActionLanguage-Profile.profile.uml#ActionLanguage"/>
     </profileApplication>
   </uml:Model>
   <Requirements:Requirement xmi:id="_j6xjUNVDEfCYZcqbPlE1Ng" base_NamedElement="_j6nLQNVDEfCYZcqbPlE1Ng" id="FR1" text="When a user presents an NFC card to the Reader, the system shall authenticate the user and log the user ID." base_Class="_j6nLQNVDEfCYZcqbPlE1Ng"/>
