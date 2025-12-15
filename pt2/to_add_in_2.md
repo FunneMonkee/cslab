@@ -5,6 +5,13 @@ espaco fisico
 espcaco local
 login cache in spiffs, when user gets deleted on the rest api delete send mqtt do clean up any caching related to the user
 
+ajeitar blackbox
+- activity diagram com system e externos
+- remover use cases que nao importam para o negocio
+- moe
+- explicar com texto os diagramas
+- traceability the FR para QR
+
 hardware to use for prototype
 ESP32 Dev Module (ESP32-WROOM-32)
 - Board A: Main control (sensing, actuation, comms)
