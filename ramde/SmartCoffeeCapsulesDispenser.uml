@@ -18,16 +18,26 @@
             <packagedElement xmi:type="uml:Class" xmi:id="_nAQGgNVDEfCYZcqbPlE1Ng" name="Calculate Remaining Capsules"/>
             <packagedElement xmi:type="uml:Class" xmi:id="_nsdsQNVDEfCYZcqbPlE1Ng" name="Warn Low Stock"/>
             <packagedElement xmi:type="uml:Class" xmi:id="_ooOw8NVDEfCYZcqbPlE1Ng" name="Refill Notification"/>
-            <packagedElement xmi:type="uml:Class" xmi:id="_pfX0UNVDEfCYZcqbPlE1Ng" name="MQTT Data Transmission"/>
+            <packagedElement xmi:type="uml:Class" xmi:id="_pfX0UNVDEfCYZcqbPlE1Ng" name="Periodic Data Transmission to Control Centre"/>
             <packagedElement xmi:type="uml:Class" xmi:id="_rh8wENVDEfCYZcqbPlE1Ng" name="Dispensing Mechanism"/>
             <packagedElement xmi:type="uml:Class" xmi:id="_sHcCwNVDEfCYZcqbPlE1Ng" name="Redundant Monitoring"/>
-            <packagedElement xmi:type="uml:Dependency" xmi:id="_l7iPQNVFEfCYZcqbPlE1Ng" name="Login required before flavor selection" client="_j6nLQNVDEfCYZcqbPlE1Ng" supplier="_kyeAUNVDEfCYZcqbPlE1Ng"/>
-            <packagedElement xmi:type="uml:Dependency" xmi:id="_pIsu0NVFEfCYZcqbPlE1Ng" name="Selection required before server registration" client="_kyeAUNVDEfCYZcqbPlE1Ng" supplier="_lpRsgNVDEfCYZcqbPlE1Ng"/>
-            <packagedElement xmi:type="uml:Dependency" xmi:id="_rB5sINVFEfCYZcqbPlE1Ng" name="Capsule detection enables capsule counting" client="_mZ9ikNVDEfCYZcqbPlE1Ng" supplier="_nAQGgNVDEfCYZcqbPlE1Ng"/>
-            <packagedElement xmi:type="uml:Dependency" xmi:id="_tLnxsNVFEfCYZcqbPlE1Ng" name="Stock count needed for low-stock warning" client="_nAQGgNVDEfCYZcqbPlE1Ng" supplier="_nsdsQNVDEfCYZcqbPlE1Ng"/>
-            <packagedElement xmi:type="uml:Dependency" xmi:id="_vD5h8NVFEfCYZcqbPlE1Ng" name="Accurate count must be available for safe dispensing" client="_nAQGgNVDEfCYZcqbPlE1Ng" supplier="_rh8wENVDEfCYZcqbPlE1Ng"/>
-            <packagedElement xmi:type="uml:Dependency" xmi:id="_x4wPMNVFEfCYZcqbPlE1Ng" name="Redundancy supports safety requirements" client="_sHcCwNVDEfCYZcqbPlE1Ng" supplier="_4GU2oNVDEfCYZcqbPlE1Ng"/>
-            <packagedElement xmi:type="uml:Dependency" xmi:id="_zn9jANVFEfCYZcqbPlE1Ng" name="Redundancy supports safety requirements" client="_sHcCwNVDEfCYZcqbPlE1Ng" supplier="_4v2UwNVDEfCYZcqbPlE1Ng"/>
+            <packagedElement xmi:type="uml:Abstraction" xmi:id="_0i2vcNqfEfCNIdzwDKykJA" name="Allocate12" client="_nsdsQNVDEfCYZcqbPlE1Ng" supplier="_4v2UwNVDEfCYZcqbPlE1Ng"/>
+            <packagedElement xmi:type="uml:Abstraction" xmi:id="_05cDcNqfEfCNIdzwDKykJA" name="Allocate13" client="_nsdsQNVDEfCYZcqbPlE1Ng" supplier="_5gRFENVDEfCYZcqbPlE1Ng"/>
+            <packagedElement xmi:type="uml:Abstraction" xmi:id="_1vycoNqfEfCNIdzwDKykJA" name="Allocate14" client="_pfX0UNVDEfCYZcqbPlE1Ng" supplier="_5gRFENVDEfCYZcqbPlE1Ng"/>
+            <packagedElement xmi:type="uml:Abstraction" xmi:id="_37-nYNqfEfCNIdzwDKykJA" name="Allocate15" client="_j6nLQNVDEfCYZcqbPlE1Ng" supplier="_6UQGwNVDEfCYZcqbPlE1Ng"/>
+            <packagedElement xmi:type="uml:Abstraction" xmi:id="_4-IA4NqfEfCNIdzwDKykJA" name="Allocate16" client="_kyeAUNVDEfCYZcqbPlE1Ng" supplier="_FzvTUNqeEfCNIdzwDKykJA"/>
+            <packagedElement xmi:type="uml:Abstraction" xmi:id="_5HyTMNqfEfCNIdzwDKykJA" name="Allocate17" client="_kyeAUNVDEfCYZcqbPlE1Ng" supplier="_vkQZYNqdEfCNIdzwDKykJA"/>
+            <packagedElement xmi:type="uml:Abstraction" xmi:id="_-kvEENqfEfCNIdzwDKykJA" name="Allocate18" client="_sHcCwNVDEfCYZcqbPlE1Ng" supplier="_4v2UwNVDEfCYZcqbPlE1Ng"/>
+            <packagedElement xmi:type="uml:Abstraction" xmi:id="_-tGV4NqfEfCNIdzwDKykJA" name="Allocate19" client="_sHcCwNVDEfCYZcqbPlE1Ng" supplier="_5gRFENVDEfCYZcqbPlE1Ng"/>
+            <packagedElement xmi:type="uml:Abstraction" xmi:id="_AQZUoNqgEfCNIdzwDKykJA" name="Allocate20" client="_rh8wENVDEfCYZcqbPlE1Ng" supplier="_6-60YNVDEfCYZcqbPlE1Ng"/>
+            <packagedElement xmi:type="uml:Abstraction" xmi:id="_BLGpYNqgEfCNIdzwDKykJA" name="Allocate21" client="_mZ9ikNVDEfCYZcqbPlE1Ng" supplier="_6-60YNVDEfCYZcqbPlE1Ng"/>
+            <packagedElement xmi:type="uml:Abstraction" xmi:id="_Cwi9MNqgEfCNIdzwDKykJA" name="Allocate22" client="_kyeAUNVDEfCYZcqbPlE1Ng" supplier="_4GU2oNVDEfCYZcqbPlE1Ng"/>
+            <packagedElement xmi:type="uml:Abstraction" xmi:id="_EMk2UNqgEfCNIdzwDKykJA" name="Allocate23" client="_lpRsgNVDEfCYZcqbPlE1Ng" supplier="_FzvTUNqeEfCNIdzwDKykJA"/>
+            <packagedElement xmi:type="uml:Abstraction" xmi:id="_EblisNqgEfCNIdzwDKykJA" name="Allocate24" client="_lpRsgNVDEfCYZcqbPlE1Ng" supplier="_vkQZYNqdEfCNIdzwDKykJA"/>
+            <packagedElement xmi:type="uml:Abstraction" xmi:id="_GDqTwNqgEfCNIdzwDKykJA" name="Allocate25" client="_nAQGgNVDEfCYZcqbPlE1Ng" supplier="_4v2UwNVDEfCYZcqbPlE1Ng"/>
+            <packagedElement xmi:type="uml:Abstraction" xmi:id="_GaVuYNqgEfCNIdzwDKykJA" name="Allocate25" client="_nAQGgNVDEfCYZcqbPlE1Ng" supplier="_4GU2oNVDEfCYZcqbPlE1Ng"/>
+            <packagedElement xmi:type="uml:Abstraction" xmi:id="_Gf0rUNqgEfCNIdzwDKykJA" name="Allocate26" client="_nsdsQNVDEfCYZcqbPlE1Ng" supplier="_4GU2oNVDEfCYZcqbPlE1Ng"/>
+            <packagedElement xmi:type="uml:Abstraction" xmi:id="_HIZHMNqgEfCNIdzwDKykJA" name="Allocate27" client="_nAQGgNVDEfCYZcqbPlE1Ng" supplier="_5gRFENVDEfCYZcqbPlE1Ng"/>
           </packagedElement>
           <packagedElement xmi:type="uml:Package" xmi:id="_GYOZgNVFEfCYZcqbPlE1Ng" name="2 Safety and Quality Requirements">
             <packagedElement xmi:type="uml:Class" xmi:id="_4GU2oNVDEfCYZcqbPlE1Ng" name="Sensor Reliability"/>
@@ -35,6 +45,8 @@
             <packagedElement xmi:type="uml:Class" xmi:id="_5gRFENVDEfCYZcqbPlE1Ng" name="Data Integrity"/>
             <packagedElement xmi:type="uml:Class" xmi:id="_6UQGwNVDEfCYZcqbPlE1Ng" name="Secure Authentication"/>
             <packagedElement xmi:type="uml:Class" xmi:id="_6-60YNVDEfCYZcqbPlE1Ng" name="Safe Motor Operation"/>
+            <packagedElement xmi:type="uml:Class" xmi:id="_vkQZYNqdEfCNIdzwDKykJA" name="Timeout"/>
+            <packagedElement xmi:type="uml:Class" xmi:id="_FzvTUNqeEfCNIdzwDKykJA" name="Aborting"/>
           </packagedElement>
         </packagedElement>
         <packagedElement xmi:type="uml:Package" xmi:id="_Gxq7oNVCEfCYZcqbPlE1Ng" name="2 Use Cases">
@@ -92,7 +104,7 @@
               <node xmi:type="uml:InitialNode" xmi:id="_93hQcNnpEfC5VI0QEoP2zg" name="" outgoing="_vJzz8NnrEfC5VI0QEoP2zg" inPartition="_lWS9YNnpEfC5VI0QEoP2zg"/>
               <node xmi:type="uml:OpaqueAction" xmi:id="__7vK8NnpEfC5VI0QEoP2zg" name="Present NFC Card" incoming="_vJzz8NnrEfC5VI0QEoP2zg" outgoing="_v550INnrEfC5VI0QEoP2zg"/>
               <node xmi:type="uml:OpaqueAction" xmi:id="_Bln54NnqEfC5VI0QEoP2zg" name="Read NFC Card" incoming="_v550INnrEfC5VI0QEoP2zg" outgoing="_ylPZANnrEfC5VI0QEoP2zg"/>
-              <node xmi:type="uml:OpaqueAction" xmi:id="_HtVfANnqEfC5VI0QEoP2zg" name="Authenticate" incoming="_ylPZANnrEfC5VI0QEoP2zg" outgoing="_zTJn4NnrEfC5VI0QEoP2zg"/>
+              <node xmi:type="uml:OpaqueAction" xmi:id="_HtVfANnqEfC5VI0QEoP2zg" name="Authenticate with Set Timeout" incoming="_ylPZANnrEfC5VI0QEoP2zg" outgoing="_zTJn4NnrEfC5VI0QEoP2zg"/>
               <node xmi:type="uml:OpaqueAction" xmi:id="_IygXUNnqEfC5VI0QEoP2zg" name="Check NFC ID" incoming="_zTJn4NnrEfC5VI0QEoP2zg" outgoing="_1PZ5MNnrEfC5VI0QEoP2zg"/>
               <node xmi:type="uml:OpaqueAction" xmi:id="_Prtq0NnqEfC5VI0QEoP2zg" name="Return OK" incoming="_10tlsNnrEfC5VI0QEoP2zg" outgoing="_BXqrgNnsEfC5VI0QEoP2zg"/>
               <node xmi:type="uml:OpaqueAction" xmi:id="_PrwuINnqEfC5VI0QEoP2zg" name="Return Unauthorized" incoming="_2wBXYNnrEfC5VI0QEoP2zg" outgoing="_Bw8uMNnsEfC5VI0QEoP2zg"/>
@@ -209,6 +221,7 @@
         </packagedElement>
         <packagedElement xmi:type="uml:Package" xmi:id="_IIHxMNVCEfCYZcqbPlE1Ng" name="3 System Context">
           <packagedElement xmi:type="uml:Class" xmi:id="_Er-LsNVIEfCYZcqbPlE1Ng" name="Smart Coffee Capsules Dispenser ">
+            <generalization xmi:type="uml:Generalization" xmi:id="_NLXrYNqiEfCNIdzwDKykJA" general="_zUkFcNqhEfCNIdzwDKykJA"/>
             <ownedAttribute xmi:type="uml:Property" xmi:id="_fE4uQNVKEfCYZcqbPlE1Ng" name="SS1" type="_yBv9sNVGEfCYZcqbPlE1Ng"/>
             <ownedAttribute xmi:type="uml:Property" xmi:id="_fE6jdtVKEfCYZcqbPlE1Ng" name="SS2" type="_1HkfINVGEfCYZcqbPlE1Ng"/>
             <ownedAttribute xmi:type="uml:Property" xmi:id="_fE7KiNVKEfCYZcqbPlE1Ng" name="SS3" type="_1mKfoNVGEfCYZcqbPlE1Ng"/>
@@ -360,6 +373,16 @@
               <subvertex xmi:type="uml:State" xmi:id="_evUUsdb8EfCqp-wohMvF2Q" name="Notify Maintenance"/>
             </region>
           </packagedElement>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Package" xmi:id="_t3agQNqhEfCNIdzwDKykJA" name="6 MOE">
+          <packagedElement xmi:type="uml:Class" xmi:id="_zUkFcNqhEfCNIdzwDKykJA" name="MoE Hodler">
+            <ownedAttribute xmi:type="uml:Property" xmi:id="_DR1acNqiEfCNIdzwDKykJA" name="Property1" visibility="public"/>
+            <ownedAttribute xmi:type="uml:Property" xmi:id="_JKB84NqiEfCNIdzwDKykJA" name="CopyOf_Property1_1" visibility="public"/>
+            <ownedAttribute xmi:type="uml:Property" xmi:id="_Jkx_MNqiEfCNIdzwDKykJA" name="CopyOf_CopyOf_Property1_1_2" visibility="public"/>
+          </packagedElement>
+          <packagedElement xmi:type="uml:DataType" xmi:id="_ZPMCkNqiEfCNIdzwDKykJA" name="ValueType2"/>
+          <packagedElement xmi:type="uml:DataType" xmi:id="_bIAlYNqiEfCNIdzwDKykJA" name="ValueType3"/>
+          <packagedElement xmi:type="uml:DataType" xmi:id="_b8L0UNqiEfCNIdzwDKykJA" name="ValueType4"/>
         </packagedElement>
       </packagedElement>
       <packagedElement xmi:type="uml:Package" xmi:id="_X0X0ENa1EfCBJ9x1fXma2Q" name="2 White Box">
@@ -903,4 +926,27 @@
   <Allocations:AllocateActivityPartition xmi:id="_SkuaINn8EfC5VI0QEoP2zg" base_ActivityPartition="_Skhl0Nn8EfC5VI0QEoP2zg"/>
   <Allocations:AllocateActivityPartition xmi:id="_SkuaIdn8EfC5VI0QEoP2zg" base_ActivityPartition="_SkiM4Nn8EfC5VI0QEoP2zg"/>
   <Allocations:AllocateActivityPartition xmi:id="_SkuaItn8EfC5VI0QEoP2zg" base_ActivityPartition="_Skiz8Nn8EfC5VI0QEoP2zg"/>
+  <Requirements:Requirement xmi:id="_vkRAcNqdEfCNIdzwDKykJA" base_NamedElement="_vkQZYNqdEfCNIdzwDKykJA" id="QR6" text="TODO" base_Class="_vkQZYNqdEfCNIdzwDKykJA"/>
+  <Requirements:Requirement xmi:id="_FzwhcNqeEfCNIdzwDKykJA" base_NamedElement="_FzvTUNqeEfCNIdzwDKykJA" id="QR7" text="When a user selects performs selects an action (refill or dispense), the system shall present the option to abort/cancel" base_Class="_FzvTUNqeEfCNIdzwDKykJA"/>
+  <Allocations:Allocate xmi:id="_0i39kNqfEfCNIdzwDKykJA" base_DirectedRelationship="_0i2vcNqfEfCNIdzwDKykJA" base_Abstraction="_0i2vcNqfEfCNIdzwDKykJA"/>
+  <Allocations:Allocate xmi:id="_05dRkNqfEfCNIdzwDKykJA" base_DirectedRelationship="_05cDcNqfEfCNIdzwDKykJA" base_Abstraction="_05cDcNqfEfCNIdzwDKykJA"/>
+  <Allocations:Allocate xmi:id="_1vzqwNqfEfCNIdzwDKykJA" base_DirectedRelationship="_1vycoNqfEfCNIdzwDKykJA" base_Abstraction="_1vycoNqfEfCNIdzwDKykJA"/>
+  <Allocations:Allocate xmi:id="_37_1gNqfEfCNIdzwDKykJA" base_DirectedRelationship="_37-nYNqfEfCNIdzwDKykJA" base_Abstraction="_37-nYNqfEfCNIdzwDKykJA"/>
+  <Allocations:Allocate xmi:id="_4-JPANqfEfCNIdzwDKykJA" base_DirectedRelationship="_4-IA4NqfEfCNIdzwDKykJA" base_Abstraction="_4-IA4NqfEfCNIdzwDKykJA"/>
+  <Allocations:Allocate xmi:id="_5H0IYNqfEfCNIdzwDKykJA" base_DirectedRelationship="_5HyTMNqfEfCNIdzwDKykJA" base_Abstraction="_5HyTMNqfEfCNIdzwDKykJA"/>
+  <Allocations:Allocate xmi:id="_-kwSMNqfEfCNIdzwDKykJA" base_DirectedRelationship="_-kvEENqfEfCNIdzwDKykJA" base_Abstraction="_-kvEENqfEfCNIdzwDKykJA"/>
+  <Allocations:Allocate xmi:id="_-tHkANqfEfCNIdzwDKykJA" base_DirectedRelationship="_-tGV4NqfEfCNIdzwDKykJA" base_Abstraction="_-tGV4NqfEfCNIdzwDKykJA"/>
+  <Allocations:Allocate xmi:id="_AQaiwNqgEfCNIdzwDKykJA" base_DirectedRelationship="_AQZUoNqgEfCNIdzwDKykJA" base_Abstraction="_AQZUoNqgEfCNIdzwDKykJA"/>
+  <Allocations:Allocate xmi:id="_BLH3gNqgEfCNIdzwDKykJA" base_DirectedRelationship="_BLGpYNqgEfCNIdzwDKykJA" base_Abstraction="_BLGpYNqgEfCNIdzwDKykJA"/>
+  <Allocations:Allocate xmi:id="_CwkLUNqgEfCNIdzwDKykJA" base_DirectedRelationship="_Cwi9MNqgEfCNIdzwDKykJA" base_Abstraction="_Cwi9MNqgEfCNIdzwDKykJA"/>
+  <Allocations:Allocate xmi:id="_EMmEcNqgEfCNIdzwDKykJA" base_DirectedRelationship="_EMk2UNqgEfCNIdzwDKykJA" base_Abstraction="_EMk2UNqgEfCNIdzwDKykJA"/>
+  <Allocations:Allocate xmi:id="_Ebmw0NqgEfCNIdzwDKykJA" base_DirectedRelationship="_EblisNqgEfCNIdzwDKykJA" base_Abstraction="_EblisNqgEfCNIdzwDKykJA"/>
+  <Allocations:Allocate xmi:id="_GDrh4NqgEfCNIdzwDKykJA" base_DirectedRelationship="_GDqTwNqgEfCNIdzwDKykJA" base_Abstraction="_GDqTwNqgEfCNIdzwDKykJA"/>
+  <Allocations:Allocate xmi:id="_GaW8gNqgEfCNIdzwDKykJA" base_DirectedRelationship="_GaVuYNqgEfCNIdzwDKykJA" base_Abstraction="_GaVuYNqgEfCNIdzwDKykJA"/>
+  <Allocations:Allocate xmi:id="_Gf15cNqgEfCNIdzwDKykJA" base_DirectedRelationship="_Gf0rUNqgEfCNIdzwDKykJA" base_Abstraction="_Gf0rUNqgEfCNIdzwDKykJA"/>
+  <Allocations:Allocate xmi:id="_HIaVUNqgEfCNIdzwDKykJA" base_DirectedRelationship="_HIZHMNqgEfCNIdzwDKykJA" base_Abstraction="_HIZHMNqgEfCNIdzwDKykJA"/>
+  <Blocks:Block xmi:id="_zUoW4NqhEfCNIdzwDKykJA" base_Class="_zUkFcNqhEfCNIdzwDKykJA"/>
+  <Blocks:ValueType xmi:id="_ZPPs8NqiEfCNIdzwDKykJA" base_DataType="_ZPMCkNqiEfCNIdzwDKykJA"/>
+  <Blocks:ValueType xmi:id="_bIDBoNqiEfCNIdzwDKykJA" base_DataType="_bIAlYNqiEfCNIdzwDKykJA"/>
+  <Blocks:ValueType xmi:id="_b8NpgNqiEfCNIdzwDKykJA" base_DataType="_b8L0UNqiEfCNIdzwDKykJA"/>
 </xmi:XMI>
