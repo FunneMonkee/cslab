@@ -27,21 +27,25 @@ PubSubClient client(mqttClient);
 // MQTT Topics
 const char* loginSuccessEsp = "/coffee/esp32/auth/login_success";
 const char* coffeeDispensingEsp = "/coffee/esp32/dispense/requested";
-const char* test = "/test";
 
 // Time settings
 const long gmtOffset_sec = 0;
 const int daylightOffset_sec = 0;
 
 // Declare task handle
-TaskHandle_t MoveServoTaskHandle = NULL;
+TaskHandle_t MoveDispenseServoTaskHandle = NULL;
+TaskHandle_t MoveRefillServoTaskHandle = NULL;
 TaskHandle_t MQTTReconnectTaskHandle = NULL;
+TaskHandle_t ErrorTaskHandle = NULL;
 
 // Semaphores
-SemaphoreHandle_t moveServoTaskSem = NULL;
+SemaphoreHandle_t moveDispenseServoTaskSem = NULL;
+SemaphoreHandle_t moveRefillServoTaskSem = NULL;
+SemaphoreHandle_t errorTaskSem = NULL;
 
 // Servos
-Servo servo;
+Servo dispense_servo;
+Servo refill_servo;
 
 // Global vars
 bool isLoggedIn = true;
@@ -49,10 +53,18 @@ int logIndex = 0;
 int readIndex = 0;
 int reconnectLoop = 5;
 bool wifiConnection = false;
+int dropSensor1 = 23;
+int dropSensor2 = 24;
+int servoClosedSensor = 25;
+
+// Methods
+void publishMessage(const char* topic, String payload, boolean retained) {
+  if (client.publish(topic, payload.c_str(), true))
+    Serial.println("Message published [" + String(topic) + "]: " + payload);
+}
 
 // Tasks
-//TODO: wifi reconnect hogged both cores (even with higher prio servo task)
-
+//TODO: wifi reconnect hogged both cores (even with higher prio dispense_servo task)
 void MQTTReconnectTask(void* parameter) {
   for (;;) {
     if (!client.connected()) {
@@ -71,19 +83,82 @@ void MQTTReconnectTask(void* parameter) {
       }
     }
 
-    client.loop();                  
-    vTaskDelay(pdMS_TO_TICKS(100));
+    client.loop();
+    vTaskDelay(pdMS_TO_TICKS(5000));
+  }
+}
+
+//TODO: add timeout
+bool readDropSensors() {
+  for (;;) {
+    sensor1Value = digitalRead(dropSensor1);
+    sensor2Value = digitalRead(dropSensor2);
+    if (sensorValue1 == HIGH && sensorValue2 == HIGH) {
+      return true;
+    }
+  }
+}
+
+//TODO: add timeout
+bool readServoMovSensor() {
+  for (;;) {
+    sensorValue = digitalRead(servoClosedSensor);
+    if (sensorValue1 == HIGH) {
+      return true;
+    }
   }
 }
 
 void MoveServoTask(void* parameter) {
   for (;;) {
     if (xSemaphoreTake(moveServoTaskSem, portMAX_DELAY)) {
-      Serial.println("moving servo..");
-      servo.write(180);
+      Serial.println("moving dispense_servo..");
+      dispense_servo.write(180);
+      if (readDropSensors()) {
+        //TODO: publish logout
+      } else {
+        xSemaphoreGive(errorTaskSem);
+        //TODO: publish logout
+      }
       delay(250);
-      servo.write(0);
+      dispense_servo.write(0);
+      if (readServoMovSensor()) {
+        //TODO: publish logout
+      } else {
+        xSemaphoreGive(errorTaskSem);
+        //TODO: publish logout
+      }
+    }
+  }
+}
+
+void MoveRefillServoTask(void* parameter) {
+  for (;;) {
+    if (xSemaphoreTake(moveServoTaskSem, portMAX_DELAY)) {
+      Serial.println("moving dispense_servo..");
+      dispense_servo.write(180);
+      if (readDropSensors()) {
+        //TODO: publish logout
+      } else {
+        xSemaphoreGive(errorTaskSem);
+        //TODO: publish logout
+      }
       delay(250);
+      dispense_servo.write(0);
+      if (readServoMovSensor()) {
+        //TODO: publish logout
+      } else {
+        xSemaphoreGive(errorTaskSem);
+        //TODO: publish logout
+      }
+    }
+  }
+}
+
+void ErrorTask(void* parameter) {
+  for (;;) {
+    if (xSemaphoreTake(errorTaskSem, portMAX_DELAY)) {
+      //TODO: publish error since we don't have CAN
     }
   }
 }
@@ -96,7 +171,6 @@ void callback(char* topic, byte* payload, unsigned int length) {
     isLoggedIn = true;
     Serial.println("Logged in");
   } else if (strcmp(topic, coffeeDispensingEsp) == 0 && isLoggedIn) {
-    Serial.println("give sem");
     xSemaphoreGive(moveServoTaskSem);
   }
   Serial.print("Callback - ");
@@ -128,10 +202,16 @@ void setup() {
   client.setServer(mqtt_server, mqtt_port);
   client.setCallback(callback);
   configTime(gmtOffset_sec, daylightOffset_sec, "pool.ntp.org", "time.nist.gov");
-  servo.setPeriodHertz(50);
-  servo.attach(23);
 
-  moveServoTaskSem = xSemaphoreCreateBinary();
+  dispense_servo.setPeriodHertz(50);
+  dispense_servo.attach(23);
+
+  refill_servo.setPeriodHertz(50);
+  refill_servo.attach(22);
+
+  moveDispenseServoTaskSem = xSemaphoreCreateBinary();
+  moveRefillServoTaskSem = xSemaphoreCreateBinary();
+  errorTaskSem = xSemaphoreCreateBinary();
 
   // Network in Core 0
   xTaskCreatePinnedToCore(
@@ -139,21 +219,39 @@ void setup() {
     "MQTTTReconnectTask",
     10000,
     NULL,
-    1,
+    2,
     &MQTTReconnectTaskHandle,
     0);
 
   xTaskCreatePinnedToCore(
-    MoveServoTask,         // Task function
-    "MoveServoTask",       // Task name
-    10000,                 // Stack size (bytes)
-    NULL,                  // Parameters
-    1,                     // Priority
-    &MoveServoTaskHandle,  // Task handle
-    1                      // Core 1
+    MoveDispenseServoTask,         // Task function
+    "MoveDispenseServoTask",       // Task name
+    10000,                         // Stack size (bytes)
+    NULL,                          // Parameters
+    1,                             // Priority
+    &MoveDispenseServoTaskHandle,  // Task handle
+    1                              // Core 1
   );
+
+  xTaskCreatePinnedToCore(
+    MoveRefillServoTask,
+    "MoveRefillServoTask",
+    10000,
+    NULL,
+    1,
+    &MoveRefillServoTaskHandle,
+    1);
+
+  xTaskCreatePinnedToCore(
+    ErrorTask,
+    "ErrorTask",
+    10000,
+    NULL,
+    3,
+    &ErrorTaskHandle,
+    1);
 }
 
 void loop() {
-  // Empty because FreeRTOS scheduler runs the task
+  // Empty because FreeRTOS scheduler runs the tasks
 }
