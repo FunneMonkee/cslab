@@ -7,29 +7,28 @@
 #include "time.h"
 #include <ESP32Servo.h>
 
-// Log settings
-struct LogEntry {
-  long long timestamp;
-  double id;
-};
-const int LOG_SIZE = 100;
-
 // WiFi settings
 const char* ssid = "Pinto";
 const char* password = "uJM9X8zG2q";
 
-// MQTT Broker settings
+// MQTT settings
 const char* mqtt_server = "5f479f2b79404567899d28e682008d15.s1.eu.hivemq.cloud";
 const char* mqtt_username = "RaspberryPico";
 const char* mqtt_password = "Raspberrypico2isep";
 const int mqtt_port = 8883;
 WiFiClientSecure mqttClient;
 PubSubClient client(mqttClient);
+const char* deviceId = "esp32";
 
 // MQTT Topics
+// Consume
 const char* loginSuccessEsp = "/coffee/esp32/auth/login_success";
-const char* logoutEsp = "/coffee/esp32/auth/logout";
 const char* coffeeDispensingEsp = "/coffee/esp32/dispense/requested";
+const char* coffeeDispensingCanceledEsp = "/coffee/esp32/dispense/canceled";
+// Consume/Publish
+const char* logoutEsp = "/coffee/esp32/auth/logout";
+// Publish
+const char* coffeeDispensingStartedEsp = "/coffee/esp32/dispense/started";
 const char* coffeeDispensingCompletedEsp = "/coffee/esp32/dispense/completed";
 const char* coffeeDispensingFailedEsp = "/coffee/esp32/dispense/failed";
 
@@ -42,11 +41,13 @@ TaskHandle_t MoveServoTaskHandle = NULL;
 TaskHandle_t MQTTReconnectTaskHandle = NULL;
 TaskHandle_t LogoutTaskHandle = NULL;
 TaskHandle_t LoginTaskHandle = NULL;
+TaskHandle_t CancelTaskHandle = NULL;
 
 // Semaphores
 SemaphoreHandle_t moveServoTaskSem = NULL;
 SemaphoreHandle_t logoutTaskSem = NULL;
 SemaphoreHandle_t loginTaskSem = NULL;
+SemaphoreHandle_t cancelTaskSem = NULL;
 
 // Servos
 Servo servo;
@@ -54,6 +55,8 @@ Servo servo;
 // Global vars
 bool isLoggedIn = false;
 bool isDispensing = false;
+bool hasReceivedCancel = false;
+bool hasTimedOut = false;
 int logIndex = 0;
 int readIndex = 0;
 int reconnectLoop = 5;
@@ -62,6 +65,49 @@ int dropSensor1 = 22;
 int dropSensor2 = 21;
 int capsuleCount = 10;
 UUID uuid;
+char* userId = "no-user";
+
+// Enums
+enum Severity {
+  INFO,
+  WARN,
+  ERROR,
+  CRITICAL
+};
+
+enum Event {
+  LOGOUT,
+  DISPENSE_STARTED,
+  DISPENSE_COMPLETED,
+  DISPENSE_CANCELED,
+  DISPENSE_FAILED,
+  REFILL_STARTED,
+  REFILL_COMPLETED,
+  REFILL_CANCELED,
+  REFILL_FAILED,
+  TIMEOUT
+};
+
+const char* SeverityStrings[4] = {
+  "info",
+  "warn",
+  "error",
+  "critical"
+};
+
+const char* EventStrings[10] = {
+  "logout",
+  "dispense_started",
+  "dispense_completed",
+  "dispense_canceled",
+  "dispense_failed",
+  "refill_started",
+  "refill_completed",
+  "refill_canceled",
+  "refill_failed",
+  "timeout"
+};
+
 
 // Methods
 String getLocTime() {
@@ -88,6 +134,8 @@ void callback(char* topic, byte* payload, unsigned int length) {
     xSemaphoreGive(logoutTaskSem);
   } else if (strcmp(topic, coffeeDispensingEsp) == 0 && isLoggedIn && !isDispensing) {
     xSemaphoreGive(moveServoTaskSem);
+  } else if (strcmp(topic, coffeeDispensingCanceledEsp) == 0) {
+    xSemaphoreGive(cancelTaskSem);
   }
   Serial.print("Callback - ");
   Serial.print("Message:");
@@ -99,12 +147,16 @@ void callback(char* topic, byte* payload, unsigned int length) {
 
 bool readServoMovSensor() {
   TickType_t startTick = xTaskGetTickCount();
-  TickType_t timeoutTicks = pdMS_TO_TICKS(2000);
+  TickType_t timeoutTicks = pdMS_TO_TICKS(8000);
 
   bool sensor1Seen = false;
   bool sensor2Seen = false;
 
   while ((xTaskGetTickCount() - startTick) < timeoutTicks) {
+    if (hasReceivedCancel && (!sensor1Seen && !sensor2Seen)) {
+      return false;
+    }
+
     if (digitalRead(dropSensor1) == HIGH) {
       sensor1Seen = true;
     }
@@ -119,22 +171,50 @@ bool readServoMovSensor() {
     }
     delay(10);
   }
-
+  hasTimedOut = true;
   return false;
 }
 
-
 // JSON
-JsonDocument generateJson(const char* event) {
+//TODO: add payload
+JsonDocument generateInfoJson(Event event) {
   JsonDocument doc;
+  FillDefaultProperties(doc);
+  doc["eventType"] = EventStrings[event];
+  doc["severity"] = SeverityStrings[Severity::INFO];
+  return doc;
+}
+
+JsonDocument generateWarningJson(Event event) {
+  JsonDocument doc;
+  FillDefaultProperties(doc);
+  doc["eventType"] = EventStrings[event];
+  doc["severity"] = SeverityStrings[Severity::WARN];
+  return doc;
+}
+
+JsonDocument generateErrorJson(Event event) {
+  JsonDocument doc;
+  FillDefaultProperties(doc);
+  doc["eventType"] = EventStrings[event];
+  doc["severity"] = SeverityStrings[Severity::ERROR];
+  return doc;
+}
+
+JsonDocument generateCriticalJson(Event event) {
+  JsonDocument doc;
+  FillDefaultProperties(doc);
+  doc["eventType"] = EventStrings[event];
+  doc["severity"] = SeverityStrings[Severity::CRITICAL];
+  return doc;
+}
+
+void FillDefaultProperties(JsonDocument doc) {
   uuid.generate();
   doc["timestamp"] = getLocTime();
-  doc["id"] = "esp32";
+  doc["id"] = deviceId;
   doc["uuid"] = uuid.toCharArray();
-  doc["severity"] = "INFO";
-  doc["eventType"] = event;
-  doc["userId"] = "id";
-  return doc;
+  doc["userId"] = userId;
 }
 
 // Tasks
@@ -144,13 +224,14 @@ void MQTTReconnectTask(void* parameter) {
   for (;;) {
     if (!client.connected()) {
       Serial.println("Attempting MQTT connection…");
-      String clientId = "device-raspberry";
+      String clientId = deviceId;
       clientId += String(random(0xffff), HEX);
       if (client.connect(clientId.c_str(), mqtt_username, mqtt_password)) {
         Serial.println("connected");
         client.subscribe(loginSuccessEsp);
         client.subscribe(logoutEsp);
         client.subscribe(coffeeDispensingEsp);
+        client.subscribe(coffeeDispensingCanceledEsp);
       } else {
         Serial.print("failed, rc=");
         Serial.print(client.state());
@@ -167,25 +248,53 @@ void MoveServoTask(void* parameter) {
   for (;;) {
     if (xSemaphoreTake(moveServoTaskSem, portMAX_DELAY)) {
       isDispensing = true;
+      hasTimedOut = false;
+      hasReceivedCancel = false;
+
       Serial.println("Dispense started..");
+      const auto doc = generateInfoJson(Event::DISPENSE_STARTED);
+      char bufferJson[256];
+      serializeJson(doc, bufferJson);
+      publishMessage(coffeeDispensingStartedEsp, bufferJson);
       servo.write(180);
       delay(250);
       if (readServoMovSensor()) {
-        const auto doc = generateJson("Dispensed");
+        const auto doc = generateInfoJson(Event::DISPENSE_COMPLETED);
         char bufferJson[256];
         serializeJson(doc, bufferJson);
         publishMessage(coffeeDispensingCompletedEsp, bufferJson);
+        servo.write(180);
         capsuleCount--;
         servo.write(0);
         delay(250);
         isDispensing = false;
       } else {
-        const auto doc = generateJson("Dispense Failed");
+        auto doc = generateWarningJson(Event::DISPENSE_FAILED);
+
+        if (hasReceivedCancel && !hasTimedOut) {
+          doc = generateWarningJson(Event::DISPENSE_CANCELED);
+          Serial.println("dispense canceled");
+          isDispensing = false;
+        } else if (hasTimedOut) {
+          doc = generateCriticalJson(Event::TIMEOUT);
+          Serial.println("dispense timeout");
+        }
+
         char bufferJson[256];
         serializeJson(doc, bufferJson);
         publishMessage(coffeeDispensingFailedEsp, bufferJson);
         Serial.println("dispense failed");
       }
+    }
+  }
+}
+
+void CancelTask(void* parameter) {
+  for (;;) {
+    if (xSemaphoreTake(cancelTaskSem, portMAX_DELAY)) {
+      Serial.println("cancelling..");
+      hasReceivedCancel = true;
+      Serial.println("cancelled");
     }
   }
 }
@@ -204,7 +313,7 @@ void LogoutTask(void* parameter) {
   for (;;) {
     if (xSemaphoreTake(logoutTaskSem, portMAX_DELAY)) {
       Serial.println("logging out..");
-      const auto doc = generateJson("Logout");
+      const auto doc = generateInfoJson(Event::LOGOUT);
       char bufferJson[256];
       serializeJson(doc, bufferJson);
       publishMessage(coffeeDispensingFailedEsp, bufferJson);
@@ -243,6 +352,7 @@ void setup() {
   moveServoTaskSem = xSemaphoreCreateBinary();
   loginTaskSem = xSemaphoreCreateBinary();
   logoutTaskSem = xSemaphoreCreateBinary();
+  cancelTaskSem = xSemaphoreCreateBinary();
 
   // Network in Core 0
   xTaskCreatePinnedToCore(
@@ -280,6 +390,15 @@ void setup() {
     NULL,
     2,
     &LoginTaskHandle,
+    1);
+
+  xTaskCreatePinnedToCore(
+    CancelTask,
+    "CancelTask",
+    10000,
+    NULL,
+    5,
+    &CancelTaskHandle,
     1);
 }
 
