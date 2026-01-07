@@ -23,7 +23,10 @@ const char* loginAttemptEsp     = "/coffee/esp32/auth/login_attempt";
 const char* loginSuccessEsp     = "/coffee/esp32/auth/login_success";
 const char* loginFailedEsp     = "/coffee/esp32/auth/login_failed";
 const char* logoutEsp     = "/coffee/esp32/auth/logout";
-const char* coffeeDispensingEsp = "/coffee/esp32/dispense/requested";
+const char* dispenseCompletedEsp = "/coffee/esp32/dispense/completed";
+const char* dispenseFailedEsp = "/coffee/esp32/dispense/failed";
+const char* dispenseRequestedEsp = "/coffee/esp32/dispense/requested";
+const char* dispenseCancelEsp = "/coffee/esp32/dispense/canceled";
 
 const char* loginAttemptEvent = "LoginAttempt";
 const char* loginSuccessEvent = "LoginSuccess";
@@ -34,6 +37,8 @@ const char* deviceId = "esp32";
 
 const int authButtonPin   = 25;
 const int coffeeButtonPin = 21;
+const int coffeeCancelButtonPin = 22;
+const int refillButtonPin = 2;
 
 const long gmtOffset_sec = 0;
 const int daylightOffset_sec = 0;
@@ -56,11 +61,20 @@ PubSubClient client(espClient);
 UUID uuid;
 
 bool isLoggedIn = false;
+bool isDispenseCompleted = false;
+bool isCoffeeRequested = false;
 
 SemaphoreHandle_t coffeeButtonSem;
+SemaphoreHandle_t coffeeDispenseCompletedSem;
+SemaphoreHandle_t coffeeDispenseFailedSem;
+SemaphoreHandle_t coffeeButtonCanceledSem;
+SemaphoreHandle_t refillButtonSem;
 
 volatile uint32_t lastAuthISR = 0;
 volatile uint32_t lastCoffeeISR = 0;
+volatile uint32_t coffeeCanceledISR = 0;
+volatile uint32_t refillISR = 0;
+
 volatile uint32_t companyId = 0;
 
 TimerHandle_t loginTimer;
@@ -84,6 +98,12 @@ void publishMessage(const char* topic, const char* payload) {
 }
 
 void callback(char* topic, byte* payload, unsigned int length) {
+  if(strcmp(topic, dispenseCompletedEsp) == 0){
+    xSemaphoreGive(coffeeDispenseCompletedSem);
+  }
+  else if(strcmp(topic, dispenseFailedEsp) == 0){
+    xSemaphoreGive(coffeeDispenseFailedSem);
+  }
   for (unsigned int i = 0; i < length; i++) {
     Serial.print((char)payload[i]);
   }
@@ -102,7 +122,32 @@ void IRAM_ATTR coffeeButtonISR() {
   }
 }
 
+void IRAM_ATTR coffeeCanceledButtonISR() {
+  uint32_t now = millis();
+  if (now - lastCoffeeISR > DEBOUNCE_MS) {
+    coffeeCanceledISR = now;
+    BaseType_t xHigherPriorityTaskWoken = pdFALSE;
+    xSemaphoreGiveFromISR(coffeeButtonCanceledSem, &xHigherPriorityTaskWoken);
+    if (xHigherPriorityTaskWoken) {
+      portYIELD_FROM_ISR();
+    }
+  }
+}
+
+void IRAM_ATTR refillButtonISR() {
+  uint32_t now = millis();
+  if (now - refillISR > DEBOUNCE_MS) {
+    refillISR = now;
+    BaseType_t xHigherPriorityTaskWoken = pdFALSE;
+    xSemaphoreGiveFromISR(refillButtonSem, &xHigherPriorityTaskWoken);
+    if (xHigherPriorityTaskWoken) {
+      portYIELD_FROM_ISR();
+    }
+  }
+}
+
 ////////////////////////////////////////////////////////////////// AUTH //////////////////////////////////////////////////////////////////////////
+
 bool processCardRead() {
   if (!mfrc522.PICC_IsNewCardPresent()) return false;
   if (!mfrc522.PICC_ReadCardSerial()) return false;
@@ -222,8 +267,15 @@ void loginFailed(const char* reason) {
   processJsonAndPublishTopic(loginFailedEvent, "WARN", loginFailedEsp, payload);
 }
 
-void processJsonAndPublishTopic(const char* event, const char* severity, const char* topic, const JsonArray payload) {
-  DynamicJsonDocument doc = generateAuthJson(event, severity, payload);
+void processJsonAndPublishTopic(const char* event, const char* severity, const char* topic, JsonArray payload) {
+  DynamicJsonDocument doc = generateJson(event, severity, &payload);
+  char buffer[512];
+  serializeJson(doc, buffer);
+  publishMessage(topic, buffer);
+}
+
+void processJsonAndPublishTopic(const char* event, const char* severity, const char* topic) {
+  DynamicJsonDocument doc = generateJson(event, severity, nullptr);
   char buffer[512];
   serializeJson(doc, buffer);
   publishMessage(topic, buffer);
@@ -236,10 +288,10 @@ bool getLoginFlagValue() {
   return v;
 }
 
-DynamicJsonDocument generateAuthJson(
+DynamicJsonDocument generateJson(
   const char* event,
   const char* severity,
-  JsonArray payload) {
+  JsonArray * payload) {
   DynamicJsonDocument doc(512);
   uuid.generate();
   doc["timestamp"] = getLocTime();
@@ -247,8 +299,9 @@ DynamicJsonDocument generateAuthJson(
   doc["uuid"] = uuid.toCharArray();
   doc["severity"] = severity;
   doc["eventType"] = event;
-  doc["payload"].set(payload); 
-
+  if(payload != nullptr){
+    doc["payload"].set(*payload); 
+  }
   return doc;
 }
 
@@ -280,9 +333,8 @@ void coffeeTask(void* pvParameters) {
         doc["flavor"] = "BlackCoffeeNespresso";
         char buffer[256];
         serializeJson(doc, buffer);
-        publishMessage(coffeeDispensingEsp, buffer);
-        logout();
-        xTimerStop(loginTimer, 0);
+        publishMessage(dispenseRequestedEsp, buffer);
+        isCoffeeRequested = true;
       }
     }
     vTaskDelay(pdMS_TO_TICKS(10));
@@ -308,6 +360,53 @@ void wifiMqttTask(void* pvParameters) {
   }
 }
 
+///////////////////////////////////////////////////////////////// COFFECOMPLETION ////////////////////////////////////////////////////////////
+
+void coffeeDispenseStatus(void* pvParameters){
+  for(;;) {
+    if (isCoffeeRequested){
+      TickType_t startTick = xTaskGetTickCount();
+      TickType_t timeoutTicks = pdMS_TO_TICKS(8000);
+      while ((xTaskGetTickCount() - startTick) < timeoutTicks) {
+        if(xSemaphoreTake(coffeeDispenseCompletedSem, portMAX_DELAY)){
+          isDispenseCompleted = true;
+        }
+        if(xSemaphoreTake(coffeeDispenseFailedSem, portMAX_DELAY)) {
+          criticalErrorHandler();
+        }
+      }
+    }
+  }
+}
+
+//////////////////////////////////////////////////////////////CANCELTASK ///////////////////////////////////////////////////
+
+
+void cancelDispense(void* pvParameters){
+  for(;;){
+    if(xSemaphoreTake(coffeeButtonCanceledSem, portMAX_DELAY)){
+      if(!isDispenseCompleted){
+        processJsonAndPublishTopic("DispenseCanceled", "WARN", dispenseCancelEsp);
+        xTimerStop(loginTimer, 0);
+        xTimerStart(loginTimer, 0);
+        }
+    }
+  }
+}
+
+//////////////////////////////////////////////////////////////Refill ///////////////////////////////////////////////////
+
+void refillTask(void* pvParameters){
+  for(;;){
+    if(xSemaphoreTake(refillButtonSem, portMAX_DELAY)){
+      if(!isDispenseCompleted){
+        processJsonAndPublishTopic("DispenseCanceled", "WARN", dispenseCancelEsp);
+        xTimerStop(loginTimer, 0);
+        xTimerStart(loginTimer, 0);
+        }
+    }
+  }
+}
 
 
 ////////////////////////////////////////////////////////////// HELPER FUNCTIONS ///////////////////////////////////////////////////////////////////
@@ -318,6 +417,12 @@ void cleanup() {
   mfrc522.PCD_StopCrypto1();
 }
 
+void criticalErrorHandler(){
+  taskENTER_CRITICAL(&mux);
+  for(;;){
+
+  }
+}
 
 void configCardKey() {
   for (byte i = 0; i < 6; i++) {
@@ -332,6 +437,13 @@ void timerCallback(TimerHandle_t xTimer){
   Serial.println(getLoginFlagValue());
 }
 
+
+void setDispenseFlagValue(bool value){
+  portENTER_CRITICAL(&mux);
+  isDispenseCompleted = value;
+  portEXIT_CRITICAL(&mux);
+}
+
 void setLoginFlagValue(bool value){
   portENTER_CRITICAL(&mux);
   isLoggedIn = value;
@@ -343,8 +455,14 @@ void setup() {
   delay(2000);
 
   pinMode(coffeeButtonPin, INPUT_PULLUP);
+  pinMode(coffeeCancelButtonPin, INPUT_PULLUP);
   
   coffeeButtonSem = xSemaphoreCreateBinary();
+  coffeeDispenseCompletedSem = xSemaphoreCreateBinary();
+  coffeeDispenseFailedSem = xSemaphoreCreateBinary();
+  coffeeButtonCanceledSem = xSemaphoreCreateBinary();
+  //logoutTaskSem = xSemaphoreCreateBinary();
+ 
   
   mfrc522.PCD_Init();
   configCardKey();
@@ -359,9 +477,7 @@ void setup() {
 
   attachInterrupt(coffeeButtonPin, coffeeButtonISR, RISING);
 
-  xTaskCreatePinnedToCore(wifiMqttTask, "WiFiMQTT", 8192, NULL, 3, NULL, 0);
-  xTaskCreatePinnedToCore(authTask, "AuthTask", 12288, NULL, 2, NULL, 1);
-  xTaskCreatePinnedToCore(coffeeTask, "CoffeeTask", 4096, NULL, 2, NULL, 1);
+  attachInterrupt(coffeeCancelButtonPin, coffeeCanceledButtonISR, RISING);
 
   loginTimer = xTimerCreate(
     "LoginTimer",
@@ -370,6 +486,15 @@ void setup() {
     NULL,
     timerCallback
   );
+
+  xTaskCreatePinnedToCore(wifiMqttTask, "WiFiMQTT", 8192, NULL, 3, NULL, 0);
+  xTaskCreatePinnedToCore(authTask, "AuthTask", 12288, NULL, 2, NULL, 1);
+  xTaskCreatePinnedToCore(coffeeTask, "CoffeeTask", 4096, NULL, 2, NULL, 1);
+  xTaskCreatePinnedToCore(cancelDispense, "CancelDispense", 4096, NULL, 2, NULL, 1);
+  xTaskCreatePinnedToCore(coffeeDispenseStatus, "coffeeDispenseStatus", 8096, NULL, 2, NULL, 1);
+  xTaskCreatePinnedToCore(refillTask, "refillTask", 4096, NULL, 2, NULL, 1);
+
+  
 
   if (loginTimer == NULL) {
     Serial.println("Failed to create timer");
