@@ -8,8 +8,8 @@
 #include <ESP32Servo.h>
 
 // WiFi settings
-const char* ssid = "Pinto";
-const char* password = "uJM9X8zG2q";
+const char* ssid = "iPhone Luis";
+const char* password = "conaconacona";
 
 // MQTT settings
 const char* mqtt_server = "5f479f2b79404567899d28e682008d15.s1.eu.hivemq.cloud";
@@ -23,14 +23,27 @@ const char* deviceId = "esp32";
 // MQTT Topics
 // Consume
 const char* loginSuccessEsp = "/coffee/esp32/auth/login_success";
+//Dispensing
 const char* coffeeDispensingEsp = "/coffee/esp32/dispense/requested";
 const char* coffeeDispensingCanceledEsp = "/coffee/esp32/dispense/canceled";
+// Refilling
+const char* coffeeRefillingEsp = "/coffee/esp32/refill/requested";
+const char* coffeeRefillingCanceledEsp = "/coffee/esp32/refill/canceled";
 // Consume/Publish
 const char* logoutEsp = "/coffee/esp32/auth/logout";
 // Publish
+// Dispensing
 const char* coffeeDispensingStartedEsp = "/coffee/esp32/dispense/started";
 const char* coffeeDispensingCompletedEsp = "/coffee/esp32/dispense/completed";
 const char* coffeeDispensingFailedEsp = "/coffee/esp32/dispense/failed";
+const char* coffeeDispensingCanceledFailedEsp = "/coffee/esp32/dispense/canceled_failed";
+// Dispensing
+const char* coffeeRefillingStartedEsp = "/coffee/esp32/refill/started";
+const char* coffeeRefillingCompletedEsp = "/coffee/esp32/refill/completed";
+const char* coffeeRefillingFailedEsp = "/coffee/esp32/refill/failed";
+const char* coffeeRefillingCanceledFailedEsp = "/coffee/esp32/refill/canceled_failed";
+// Logging
+const char* statusMetricsEsp = "/coffee/esp32/status/metrics";
 
 // Time settings
 const long gmtOffset_sec = 0;
@@ -38,13 +51,16 @@ const int daylightOffset_sec = 0;
 
 // Declare task handle
 TaskHandle_t MoveServoTaskHandle = NULL;
+TaskHandle_t MoveRefillServoTaskHandle = NULL;
 TaskHandle_t MQTTReconnectTaskHandle = NULL;
 TaskHandle_t LogoutTaskHandle = NULL;
 TaskHandle_t LoginTaskHandle = NULL;
 TaskHandle_t CancelTaskHandle = NULL;
+TaskHandle_t LoggingTaskHandle = NULL;
 
 // Semaphores
 SemaphoreHandle_t moveServoTaskSem = NULL;
+SemaphoreHandle_t moveServoRefillTaskSem = NULL;
 SemaphoreHandle_t logoutTaskSem = NULL;
 SemaphoreHandle_t loginTaskSem = NULL;
 SemaphoreHandle_t cancelTaskSem = NULL;
@@ -55,6 +71,7 @@ Servo servo;
 // Global vars
 bool isLoggedIn = false;
 bool isDispensing = false;
+bool isRefilling = false;
 bool hasReceivedCancel = false;
 bool hasTimedOut = false;
 int logIndex = 0;
@@ -63,9 +80,10 @@ int reconnectLoop = 5;
 bool wifiConnection = false;
 int dropSensor1 = 22;
 int dropSensor2 = 21;
-int capsuleCount = 10;
+int capsuleCount = 5;
 UUID uuid;
 char* userId = "no-user";
+int upTime = 0;
 
 // Enums
 enum Severity {
@@ -85,7 +103,8 @@ enum Event {
   REFILL_COMPLETED,
   REFILL_CANCELED,
   REFILL_FAILED,
-  TIMEOUT
+  TIMEOUT,
+  LOGGING
 };
 
 const char* SeverityStrings[4] = {
@@ -95,7 +114,7 @@ const char* SeverityStrings[4] = {
   "critical"
 };
 
-const char* EventStrings[10] = {
+const char* EventStrings[11] = {
   "logout",
   "dispense_started",
   "dispense_completed",
@@ -105,9 +124,9 @@ const char* EventStrings[10] = {
   "refill_completed",
   "refill_canceled",
   "refill_failed",
-  "timeout"
+  "timeout",
+  "logging"
 };
-
 
 // Methods
 String getLocTime() {
@@ -134,7 +153,11 @@ void callback(char* topic, byte* payload, unsigned int length) {
     xSemaphoreGive(logoutTaskSem);
   } else if (strcmp(topic, coffeeDispensingEsp) == 0 && isLoggedIn && !isDispensing) {
     xSemaphoreGive(moveServoTaskSem);
+  } else if (strcmp(topic, coffeeRefillingEsp) == 0 && isLoggedIn && !isRefilling) {
+    xSemaphoreGive(moveServoRefillTaskSem);
   } else if (strcmp(topic, coffeeDispensingCanceledEsp) == 0 && isDispensing) {
+    xSemaphoreGive(cancelTaskSem);
+  } else if (strcmp(topic, coffeeRefillingCanceledEsp) == 0 && isRefilling) {
     xSemaphoreGive(cancelTaskSem);
   }
   Serial.print("Callback - ");
@@ -155,6 +178,48 @@ bool readServoMovSensor() {
   while ((xTaskGetTickCount() - startTick) < timeoutTicks) {
     if (hasReceivedCancel && (!sensor1Seen && !sensor2Seen)) {
       return false;
+    } else if (hasReceivedCancel && sensor1Seen && sensor2Seen) {
+      auto doc = generateErrorJson(Event::DISPENSE_CANCELED);
+      char bufferJson[256];
+      serializeJson(doc, bufferJson);
+      publishMessage(coffeeDispensingCanceledFailedEsp, bufferJson);
+      Serial.println("dispense canceled failed");
+    }
+
+    if (digitalRead(dropSensor1) == HIGH) {
+      sensor1Seen = true;
+    }
+
+    if (digitalRead(dropSensor2) == HIGH) {
+      sensor2Seen = true;
+    }
+
+    if (sensor1Seen && sensor2Seen) {
+      Serial.println("Both sensors triggered");
+      return true;
+    }
+    delay(10);
+  }
+  hasTimedOut = true;
+  return false;
+}
+
+bool readServoRefillMovSensor() {
+  TickType_t startTick = xTaskGetTickCount();
+  TickType_t timeoutTicks = pdMS_TO_TICKS(10000);
+
+  bool sensor1Seen = false;
+  bool sensor2Seen = false;
+
+  while ((xTaskGetTickCount() - startTick) < timeoutTicks) {
+    if (hasReceivedCancel && (!sensor1Seen && !sensor2Seen)) {
+      return false;
+    } else if (hasReceivedCancel && sensor1Seen && sensor2Seen) {
+      auto doc = generateErrorJson(Event::REFILL_CANCELED);
+      char bufferJson[256];
+      serializeJson(doc, bufferJson);
+      publishMessage(coffeeRefillingCanceledFailedEsp, bufferJson);
+      Serial.println("refill canceled failed");
     }
 
     if (digitalRead(dropSensor1) == HIGH) {
@@ -232,6 +297,8 @@ void MQTTReconnectTask(void* parameter) {
         client.subscribe(logoutEsp);
         client.subscribe(coffeeDispensingEsp);
         client.subscribe(coffeeDispensingCanceledEsp);
+        client.subscribe(coffeeRefillingEsp);
+        client.subscribe(coffeeRefillingCanceledEsp);
       } else {
         Serial.print("failed, rc=");
         Serial.print(client.state());
@@ -247,9 +314,9 @@ void MQTTReconnectTask(void* parameter) {
 void MoveServoTask(void* parameter) {
   for (;;) {
     if (xSemaphoreTake(moveServoTaskSem, portMAX_DELAY)) {
-      isDispensing = true;
       hasTimedOut = false;
       hasReceivedCancel = false;
+      isDispensing = true;
 
       Serial.println("Dispense started..");
       const auto doc = generateInfoJson(Event::DISPENSE_STARTED);
@@ -268,6 +335,7 @@ void MoveServoTask(void* parameter) {
         servo.write(0);
         delay(250);
         isDispensing = false;
+        Serial.println("dispense completed");
       } else {
         auto doc = generateWarningJson(Event::DISPENSE_FAILED);
 
@@ -284,6 +352,67 @@ void MoveServoTask(void* parameter) {
         serializeJson(doc, bufferJson);
         publishMessage(coffeeDispensingFailedEsp, bufferJson);
         Serial.println("dispense failed");
+      }
+    }
+  }
+}
+
+void MoveRefillServoTask(void* parameter) {
+  for (;;) {
+    if (xSemaphoreTake(moveServoRefillTaskSem, portMAX_DELAY)) {
+      hasTimedOut = false;
+      hasReceivedCancel = false;
+      isRefilling = true;
+
+      Serial.println("Refill started..");
+      auto doc = generateInfoJson(Event::REFILL_STARTED);
+      char bufferJson[256];
+      serializeJson(doc, bufferJson);
+      publishMessage(coffeeRefillingStartedEsp, bufferJson);
+      servo.write(180);
+      delay(250);
+      TickType_t startTick = xTaskGetTickCount();
+      TickType_t timeoutTicks = pdMS_TO_TICKS(8000);
+
+      while ((xTaskGetTickCount() - startTick) < timeoutTicks) {
+        while (capsuleCount < 10) {
+          if (readServoRefillMovSensor()) {
+            capsuleCount++;
+            Serial.println(capsuleCount);
+          }
+          if (hasReceivedCancel)
+          {
+            break;
+          }
+        }
+      }
+      if (capsuleCount == 10) {
+        const auto doc = generateInfoJson(Event::REFILL_COMPLETED);
+        char bufferJson[256];
+        serializeJson(doc, bufferJson);
+        publishMessage(coffeeRefillingCompletedEsp, bufferJson);
+        servo.write(180);
+
+        servo.write(0);
+        delay(250);
+        isRefilling = false;
+        Serial.println("dispense completed");
+      } else {
+        doc = generateWarningJson(Event::REFILL_FAILED);
+
+        if (hasReceivedCancel && !hasTimedOut) {
+          doc = generateWarningJson(Event::REFILL_CANCELED);
+          Serial.println("refill canceled");
+          isRefilling = false;
+        } else if (hasTimedOut) {
+          doc = generateCriticalJson(Event::TIMEOUT);
+          Serial.println("refill timeout");
+        }
+        //TODO: turn off esp
+        bufferJson[256];
+        serializeJson(doc, bufferJson);
+        publishMessage(coffeeRefillingFailedEsp, bufferJson);
+        Serial.println("refill failed");
       }
     }
   }
@@ -323,9 +452,24 @@ void LogoutTask(void* parameter) {
   }
 }
 
+//TODO: logging later
+void LoggingTask(void* parameter) {
+  for (;;) {
+    Serial.println("logging status..");
+    const auto doc = generateInfoJson(Event::LOGGING);
+    char bufferJson[256];
+    serializeJson(doc, bufferJson);
+    publishMessage(statusMetricsEsp, bufferJson);
+    Serial.println("logged");
+    vTaskDelay(pdMS_TO_TICKS(10000));
+  }
+}
+
 void setup() {
   delay(5000);
   Serial.begin(115200);
+  TickType_t startTick = xTaskGetTickCount();
+  upTime = (unsigned int)startTick;
   Serial.print("Connecting to ");
   Serial.println(ssid);
   Serial.println("\n");
@@ -350,6 +494,7 @@ void setup() {
   pinMode(dropSensor2, INPUT);
 
   moveServoTaskSem = xSemaphoreCreateBinary();
+  moveServoRefillTaskSem = xSemaphoreCreateBinary();
   loginTaskSem = xSemaphoreCreateBinary();
   logoutTaskSem = xSemaphoreCreateBinary();
   cancelTaskSem = xSemaphoreCreateBinary();
@@ -369,10 +514,19 @@ void setup() {
     "MoveServoTask",       // Task name
     10000,                 // Stack size (bytes)
     NULL,                  // Parameters
-    1,                     // Priority
+    4,                     // Priority
     &MoveServoTaskHandle,  // Task handle
     1                      // Core 1
   );
+
+  xTaskCreatePinnedToCore(
+    MoveRefillServoTask,
+    "MoveRefillServoTask",
+    10000,
+    NULL,
+    4,
+    &MoveRefillServoTaskHandle,
+    1);
 
   xTaskCreatePinnedToCore(
     LogoutTask,
@@ -400,6 +554,15 @@ void setup() {
     5,
     &CancelTaskHandle,
     1);
+
+  /*xTaskCreatePinnedToCore(
+    LoggingTask,
+    "LoggingTask,",
+    10000,
+    NULL,
+    1,
+    &LoggingTaskHandle,
+    1);*/
 }
 
 void loop() {
