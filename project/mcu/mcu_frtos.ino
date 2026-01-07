@@ -134,7 +134,7 @@ void callback(char* topic, byte* payload, unsigned int length) {
     xSemaphoreGive(logoutTaskSem);
   } else if (strcmp(topic, coffeeDispensingEsp) == 0 && isLoggedIn && !isDispensing) {
     xSemaphoreGive(moveServoTaskSem);
-  } else if (strcmp(topic, coffeeDispensingCanceledEsp) == 0) {
+  } else if (strcmp(topic, coffeeDispensingCanceledEsp) == 0 && isDispensing) {
     xSemaphoreGive(cancelTaskSem);
   }
   Serial.print("Callback - ");
@@ -279,7 +279,7 @@ void MoveServoTask(void* parameter) {
           doc = generateCriticalJson(Event::TIMEOUT);
           Serial.println("dispense timeout");
         }
-
+        //TODO: turn off esp
         char bufferJson[256];
         serializeJson(doc, bufferJson);
         publishMessage(coffeeDispensingFailedEsp, bufferJson);
