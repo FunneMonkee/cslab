@@ -44,6 +44,7 @@ const char* coffeeRefillingFailedEsp = "/coffee/esp32/refill/failed";
 const char* coffeeRefillingCanceledFailedEsp = "/coffee/esp32/refill/canceled_failed";
 // Logging
 const char* statusMetricsEsp = "/coffee/esp32/status/metrics";
+const char* alertLowStockEsp = "/coffee/esp32/status/low";
 
 // Time settings
 const long gmtOffset_sec = 0;
@@ -104,7 +105,8 @@ enum Event {
   REFILL_CANCELED,
   REFILL_FAILED,
   TIMEOUT,
-  LOGGING
+  LOGGING,
+  STOCK
 };
 
 const char* SeverityStrings[4] = {
@@ -114,7 +116,7 @@ const char* SeverityStrings[4] = {
   "critical"
 };
 
-const char* EventStrings[11] = {
+const char* EventStrings[12] = {
   "logout",
   "dispense_started",
   "dispense_completed",
@@ -125,7 +127,8 @@ const char* EventStrings[11] = {
   "refill_canceled",
   "refill_failed",
   "timeout",
-  "logging"
+  "logging",
+  "stock"
 };
 
 // Methods
@@ -240,13 +243,25 @@ bool readServoRefillMovSensor() {
   return false;
 }
 
+void alertStock() {
+  StaticJsonDocument<64> payloadDoc; 
+  JsonArray payload = emptyDoc.createNestedArray();
+  payload.add(capsuleCount)
+  const auto doc = generateInfoJson(Event::STOCK, payload);
+  char bufferJson[256];
+  serializeJson(doc, bufferJson);
+  publishMessage(alertLowStockEsp, bufferJson);
+  Serial.println("alert low stock");
+}
+
 // JSON
-//TODO: add payload
-JsonDocument generateInfoJson(Event event) {
+JsonDocument generateInfoJson(Event event, JsonArray payload) {
   JsonDocument doc;
   FillDefaultProperties(doc);
   doc["eventType"] = EventStrings[event];
   doc["severity"] = SeverityStrings[Severity::INFO];
+  doc["payload"].set(payload);
+
   return doc;
 }
 
@@ -255,6 +270,7 @@ JsonDocument generateWarningJson(Event event) {
   FillDefaultProperties(doc);
   doc["eventType"] = EventStrings[event];
   doc["severity"] = SeverityStrings[Severity::WARN];
+
   return doc;
 }
 
@@ -263,6 +279,7 @@ JsonDocument generateErrorJson(Event event) {
   FillDefaultProperties(doc);
   doc["eventType"] = EventStrings[event];
   doc["severity"] = SeverityStrings[Severity::ERROR];
+
   return doc;
 }
 
@@ -271,6 +288,7 @@ JsonDocument generateCriticalJson(Event event) {
   FillDefaultProperties(doc);
   doc["eventType"] = EventStrings[event];
   doc["severity"] = SeverityStrings[Severity::CRITICAL];
+
   return doc;
 }
 
@@ -314,45 +332,60 @@ void MQTTReconnectTask(void* parameter) {
 void MoveServoTask(void* parameter) {
   for (;;) {
     if (xSemaphoreTake(moveServoTaskSem, portMAX_DELAY)) {
-      hasTimedOut = false;
-      hasReceivedCancel = false;
-      isDispensing = true;
+      if (capsuleCount > 0) {
+        hasTimedOut = false;
+        hasReceivedCancel = false;
+        isDispensing = true;
 
-      Serial.println("Dispense started..");
-      const auto doc = generateInfoJson(Event::DISPENSE_STARTED);
-      char bufferJson[256];
-      serializeJson(doc, bufferJson);
-      publishMessage(coffeeDispensingStartedEsp, bufferJson);
-      servo.write(180);
-      delay(250);
-      if (readServoMovSensor()) {
-        const auto doc = generateInfoJson(Event::DISPENSE_COMPLETED);
+        Serial.println("Dispense started..");
+        StaticJsonDocument<64> emptyDoc; 
+        JsonArray emptyArray = emptyDoc.createNestedArray();
+        const auto doc = generateInfoJson(Event::DISPENSE_STARTED, emptyArray);
         char bufferJson[256];
         serializeJson(doc, bufferJson);
-        publishMessage(coffeeDispensingCompletedEsp, bufferJson);
+        publishMessage(coffeeDispensingStartedEsp, bufferJson);
         servo.write(180);
-        capsuleCount--;
-        servo.write(0);
         delay(250);
-        isDispensing = false;
-        Serial.println("dispense completed");
-      } else {
-        auto doc = generateWarningJson(Event::DISPENSE_FAILED);
+        if (readServoMovSensor()) {
+          capsuleCount--;
+          if (capsuleCount < 3)
+            alertStock();
 
-        if (hasReceivedCancel && !hasTimedOut) {
-          doc = generateWarningJson(Event::DISPENSE_CANCELED);
-          Serial.println("dispense canceled");
+          StaticJsonDocument<64> payloadDoc;
+          JsonArray payload = payloadDoc.to<JsonArray>();
+
+          payload.add(capsuleCount);
+
+          const auto doc = generateInfoJson(Event::DISPENSE_COMPLETED, payload);
+          char bufferJson[256];
+          serializeJson(doc, bufferJson);
+          publishMessage(coffeeDispensingCompletedEsp, bufferJson);
+          servo.write(180);
+          servo.write(0);
+          delay(250);
           isDispensing = false;
-        } else if (hasTimedOut) {
-          doc = generateCriticalJson(Event::TIMEOUT);
-          Serial.println("dispense timeout");
+          Serial.println("dispense completed");
+        } else {
+          auto doc = generateWarningJson(Event::DISPENSE_FAILED);
+
+          if (hasReceivedCancel && !hasTimedOut) {
+            doc = generateWarningJson(Event::DISPENSE_CANCELED);
+            Serial.println("dispense canceled");
+            isDispensing = false;
+          } else if (hasTimedOut) {
+            doc = generateCriticalJson(Event::TIMEOUT);
+            Serial.println("dispense timeout");
+          }
+          char bufferJson[256];
+          serializeJson(doc, bufferJson);
+          publishMessage(coffeeDispensingFailedEsp, bufferJson);
+          Serial.println("dispense failed");
+
+          //simulate turn off
+          vTaskDelay(pdMS_TO_TICKS(9999999));
         }
-        //TODO: turn off esp
-        char bufferJson[256];
-        serializeJson(doc, bufferJson);
-        publishMessage(coffeeDispensingFailedEsp, bufferJson);
-        Serial.println("dispense failed");
-      }
+      } else
+        alertStock();
     }
   }
 }
@@ -360,59 +393,70 @@ void MoveServoTask(void* parameter) {
 void MoveRefillServoTask(void* parameter) {
   for (;;) {
     if (xSemaphoreTake(moveServoRefillTaskSem, portMAX_DELAY)) {
-      hasTimedOut = false;
-      hasReceivedCancel = false;
-      isRefilling = true;
+      if (capsuleCount < 10) {
+        hasTimedOut = false;
+        hasReceivedCancel = false;
+        isRefilling = true;
 
-      Serial.println("Refill started..");
-      auto doc = generateInfoJson(Event::REFILL_STARTED);
-      char bufferJson[256];
-      serializeJson(doc, bufferJson);
-      publishMessage(coffeeRefillingStartedEsp, bufferJson);
-      servo.write(180);
-      delay(250);
-      TickType_t startTick = xTaskGetTickCount();
-      TickType_t timeoutTicks = pdMS_TO_TICKS(8000);
-
-      while ((xTaskGetTickCount() - startTick) < timeoutTicks) {
-        while (capsuleCount < 10) {
-          if (readServoRefillMovSensor()) {
-            capsuleCount++;
-            Serial.println(capsuleCount);
-          }
-          if (hasReceivedCancel)
-          {
-            break;
-          }
-        }
-      }
-      if (capsuleCount == 10) {
-        const auto doc = generateInfoJson(Event::REFILL_COMPLETED);
+        Serial.println("Refill started..");
+        StaticJsonDocument<64> emptyDoc; 
+        JsonArray emptyArray = emptyDoc.createNestedArray();
+        auto doc = generateInfoJson(Event::REFILL_STARTED, emptyArray);
         char bufferJson[256];
         serializeJson(doc, bufferJson);
-        publishMessage(coffeeRefillingCompletedEsp, bufferJson);
+        publishMessage(coffeeRefillingStartedEsp, bufferJson);
         servo.write(180);
-
-        servo.write(0);
         delay(250);
-        isRefilling = false;
-        Serial.println("dispense completed");
-      } else {
-        doc = generateWarningJson(Event::REFILL_FAILED);
+        TickType_t startTick = xTaskGetTickCount();
+        TickType_t timeoutTicks = pdMS_TO_TICKS(8000);
 
-        if (hasReceivedCancel && !hasTimedOut) {
-          doc = generateWarningJson(Event::REFILL_CANCELED);
-          Serial.println("refill canceled");
-          isRefilling = false;
-        } else if (hasTimedOut) {
-          doc = generateCriticalJson(Event::TIMEOUT);
-          Serial.println("refill timeout");
+        while ((xTaskGetTickCount() - startTick) < timeoutTicks) {
+          while (capsuleCount < 10) {
+            if (readServoRefillMovSensor()) {
+              capsuleCount++;
+              Serial.println(capsuleCount);
+            }
+            if (hasReceivedCancel) {
+              break;
+            }
+          }
         }
-        //TODO: turn off esp
-        bufferJson[256];
-        serializeJson(doc, bufferJson);
-        publishMessage(coffeeRefillingFailedEsp, bufferJson);
-        Serial.println("refill failed");
+        if (capsuleCount == 10) {
+          StaticJsonDocument<64> payloadDoc;
+          JsonArray payload = payloadDoc.to<JsonArray>();
+
+          payload.add(capsuleCount);
+
+          const auto doc = generateInfoJson(Event::REFILL_COMPLETED, payload);
+          char bufferJson[256];
+          serializeJson(doc, bufferJson);
+          publishMessage(coffeeRefillingCompletedEsp, bufferJson);
+          servo.write(180);
+
+          servo.write(0);
+          delay(250);
+          isRefilling = false;
+          Serial.println("dispense completed");
+        } else {
+          doc = generateWarningJson(Event::REFILL_FAILED);
+
+          if (hasReceivedCancel && !hasTimedOut) {
+            doc = generateWarningJson(Event::REFILL_CANCELED);
+            Serial.println("refill canceled");
+            isRefilling = false;
+          } else if (hasTimedOut) {
+            doc = generateCriticalJson(Event::TIMEOUT);
+            Serial.println("refill timeout");
+          }
+
+          bufferJson[256];
+          serializeJson(doc, bufferJson);
+          publishMessage(coffeeRefillingFailedEsp, bufferJson);
+          Serial.println("refill failed");
+
+          //simulate turn off
+          vTaskDelay(pdMS_TO_TICKS(9999999));
+        }
       }
     }
   }
@@ -442,7 +486,9 @@ void LogoutTask(void* parameter) {
   for (;;) {
     if (xSemaphoreTake(logoutTaskSem, portMAX_DELAY)) {
       Serial.println("logging out..");
-      const auto doc = generateInfoJson(Event::LOGOUT);
+      StaticJsonDocument<64> emptyDoc; 
+      JsonArray emptyArray = emptyDoc.createNestedArray();
+      const auto doc = generateInfoJson(Event::LOGOUT, emptyArray);
       char bufferJson[256];
       serializeJson(doc, bufferJson);
       publishMessage(coffeeDispensingFailedEsp, bufferJson);
@@ -452,11 +498,15 @@ void LogoutTask(void* parameter) {
   }
 }
 
-//TODO: logging later
 void LoggingTask(void* parameter) {
   for (;;) {
     Serial.println("logging status..");
-    const auto doc = generateInfoJson(Event::LOGGING);
+    StaticJsonDocument<64> payloadDoc;
+    JsonArray payload = payloadDoc.to<JsonArray>();
+
+    payload.add(capsuleCount);
+
+    const auto doc = generateInfoJson(Event::LOGGING, payload);
     char bufferJson[256];
     serializeJson(doc, bufferJson);
     publishMessage(statusMetricsEsp, bufferJson);
@@ -555,14 +605,14 @@ void setup() {
     &CancelTaskHandle,
     1);
 
-  /*xTaskCreatePinnedToCore(
+  xTaskCreatePinnedToCore(
     LoggingTask,
     "LoggingTask,",
     10000,
     NULL,
     1,
     &LoggingTaskHandle,
-    1);*/
+    1);
 }
 
 void loop() {

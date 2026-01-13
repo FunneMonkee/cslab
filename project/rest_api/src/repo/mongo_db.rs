@@ -12,10 +12,12 @@ use mongodb::{
     sync::{Client, Collection},
 };
 
+use crate::model::dispense_log::DispenseLog;
 use crate::model::user::User;
 
 pub struct MongoRepo {
     col: Collection<User>,
+    dispense_log_col: Collection<DispenseLog>,
 }
 
 impl MongoRepo {
@@ -27,7 +29,11 @@ impl MongoRepo {
         let client = Client::with_uri_str(uri).unwrap();
         let db = client.database("cslab");
         let col: Collection<User> = db.collection("users");
-        MongoRepo { col }
+        let dispense_log_col: Collection<DispenseLog> = db.collection("dispense_log");
+        MongoRepo {
+            col,
+            dispense_log_col,
+        }
     }
 
     pub fn create_user(&self, new_user: User) -> Result<InsertOneResult, Error> {
@@ -75,5 +81,14 @@ impl MongoRepo {
             .ok()
             .expect("Error deleting user");
         Ok(deleted_user)
+    }
+
+    pub fn create_dispense_log(&self, log: DispenseLog) -> Result<InsertOneResult, Error> {
+        self.dispense_log_col.insert_one(log, None)
+    }
+
+    pub fn get_all_dispense_logs(&self) -> Result<Vec<DispenseLog>, Error> {
+        let cursor = self.dispense_log_col.find(None, None)?;
+        Ok(cursor.map(|doc| doc.unwrap()).collect())
     }
 }

@@ -2,6 +2,7 @@ mod api;
 mod model;
 mod repo;
 
+use api::dispense_log::{create_dispense, get_all_dispenses};
 use api::user::{create_user, delete_user, get_user, update_user};
 
 use actix_web::{App, HttpServer, middleware::Logger, web::Data};
@@ -29,6 +30,8 @@ async fn main() -> std::io::Result<()> {
             .service(get_user)
             .service(update_user)
             .service(delete_user)
+            .service(create_dispense)
+            .service(get_all_dispenses)
     })
     .bind(("0.0.0.0", 8080))?
     .run()
