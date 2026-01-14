@@ -5,6 +5,7 @@ use std::env;
 use mongodb::{
     bson::{doc, oid::ObjectId, to_bson},
     error::Error,
+    options::FindOptions,
     results::{DeleteResult, UpdateResult},
 };
 use mongodb::{
@@ -88,7 +89,11 @@ impl MongoRepo {
     }
 
     pub fn get_all_dispense_logs(&self) -> Result<Vec<DispenseLog>, Error> {
-        let cursor = self.dispense_log_col.find(None, None)?;
+        let find_options = FindOptions::builder()
+            .sort(doc! { "dispensed_at": -1 })
+            .build();
+
+        let cursor = self.dispense_log_col.find(None, find_options)?;
         Ok(cursor.map(|doc| doc.unwrap()).collect())
     }
 }
