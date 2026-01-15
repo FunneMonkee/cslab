@@ -1,0 +1,436 @@
+[
+    {
+        "id": "coffee_tab",
+        "type": "tab",
+        "label": "Command Centre",
+        "disabled": false
+    },
+    {
+        "id": "event_counter",
+        "type": "function",
+        "z": "coffee_tab",
+        "name": "Event Counter (shared)",
+        "func": "const key = msg.topic;\nlet counts = flow.get('eventCounts') || {};\ncounts[key] = (counts[key] || 0) + 1;\nflow.set('eventCounts', counts);\n\nmsg.payload = counts[key];\nmsg.label = key;\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 100,
+        "wires": [
+            [
+                "router"
+            ]
+        ]
+    },
+    {
+        "id": "mqtt_all",
+        "type": "mqtt in",
+        "z": "coffee_tab",
+        "name": "Coffee ESP32 Events",
+        "topic": "/coffee/esp32/#",
+        "qos": "1",
+        "datatype": "auto",
+        "broker": "mqtt_broker",
+        "nl": false,
+        "rap": false,
+        "inputs": 0,
+        "x": 170,
+        "y": 120,
+        "wires": [
+            [
+                "event_counter",
+                "6de435dc3c976c28"
+            ]
+        ]
+    },
+    {
+        "id": "chart_auth",
+        "type": "ui_chart",
+        "z": "coffee_tab",
+        "name": "Auth Events Count",
+        "group": "ui_auth",
+        "order": 1,
+        "label": "Authentication Events",
+        "chartType": "bar",
+        "xformat": "HH:mm:ss",
+        "removeOlder": "48",
+        "removeOlderUnit": "3600",
+        "outputs": 1,
+        "x": 790,
+        "y": 80,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "chart_dispense",
+        "type": "ui_chart",
+        "z": "coffee_tab",
+        "name": "Dispense Events Count",
+        "group": "ui_dispense",
+        "order": 1,
+        "label": "Dispensing Events",
+        "chartType": "bar",
+        "xformat": "HH:mm:ss",
+        "removeOlder": "48",
+        "removeOlderUnit": "3600",
+        "outputs": 1,
+        "x": 810,
+        "y": 180,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "chart_refill",
+        "type": "ui_chart",
+        "z": "coffee_tab",
+        "name": "Refill Events Count",
+        "group": "ui_refill",
+        "order": 1,
+        "label": "Refilling Events",
+        "chartType": "bar",
+        "xformat": "HH:mm:ss",
+        "removeOlder": "48",
+        "removeOlderUnit": "3600",
+        "outputs": 1,
+        "x": 810,
+        "y": 280,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "chart_status",
+        "type": "ui_chart",
+        "z": "coffee_tab",
+        "name": "Status Events Count",
+        "group": "ui_status",
+        "order": 1,
+        "label": "Status & Alerts",
+        "chartType": "bar",
+        "xformat": "HH:mm:ss",
+        "removeOlder": "48",
+        "removeOlderUnit": "3600",
+        "outputs": 1,
+        "x": 780,
+        "y": 400,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "router",
+        "type": "switch",
+        "z": "coffee_tab",
+        "name": "Route by Category",
+        "property": "topic",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "cont",
+                "v": "/auth/",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "/dispense/",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "/refill/",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "/status/",
+                "vt": "str"
+            }
+        ],
+        "repair": false,
+        "outputs": 4,
+        "x": 470,
+        "y": 260,
+        "wires": [
+            [
+                "chart_auth"
+            ],
+            [
+                "chart_dispense"
+            ],
+            [
+                "chart_refill"
+            ],
+            [
+                "chart_status"
+            ]
+        ]
+    },
+    {
+        "id": "791cc492903121dc",
+        "type": "mqtt in",
+        "z": "coffee_tab",
+        "name": "Low Stock",
+        "topic": "/coffee/esp32/status/low",
+        "qos": "1",
+        "datatype": "auto",
+        "broker": "mqtt_broker",
+        "nl": false,
+        "rap": false,
+        "inputs": 0,
+        "x": 120,
+        "y": 680,
+        "wires": [
+            [
+                "a2167ffdcc0978de",
+                "4522219af1fb5107"
+            ]
+        ]
+    },
+    {
+        "id": "a2167ffdcc0978de",
+        "type": "ui_toast",
+        "z": "coffee_tab",
+        "position": "top right",
+        "displayTime": "3",
+        "highlight": "",
+        "sendall": true,
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "raw": false,
+        "className": "",
+        "topic": "",
+        "name": "Low Stock",
+        "x": 430,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "3988a2c41972801a",
+        "type": "ui_gauge",
+        "z": "coffee_tab",
+        "name": "LOW STOCK",
+        "group": "ui_status",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Low Stock",
+        "label": "units",
+        "format": "",
+        "min": "0",
+        "max": "1",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ff0000"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 670,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "4522219af1fb5107",
+        "type": "function",
+        "z": "coffee_tab",
+        "name": "Low Stock Count",
+        "func": "const now = Date.now();\nflow.set(\"lowStockLastSeen\", now);\n\n// Turn gauge ON\nmsg.payload = 1;\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 310,
+        "y": 780,
+        "wires": [
+            [
+                "3988a2c41972801a"
+            ]
+        ]
+    },
+    {
+        "id": "d3e7bdf55915b3e5",
+        "type": "inject",
+        "z": "coffee_tab",
+        "name": "Stock Timer 1min",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "60",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 170,
+        "y": 880,
+        "wires": [
+            [
+                "04cd24f55994d760"
+            ]
+        ]
+    },
+    {
+        "id": "04cd24f55994d760",
+        "type": "function",
+        "z": "coffee_tab",
+        "name": "Low Stock Check",
+        "func": "const last = flow.get(\"lowStockLastSeen\");\nconst THIRTY_MIN = 30 * 60 * 1000;\n\nif (!last) {\n    msg.payload = 0;\n    return msg;\n}\n\nconst expired = (Date.now() - last) > THIRTY_MIN;\nmsg.payload = expired ? 0 : 1;\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 430,
+        "y": 880,
+        "wires": [
+            [
+                "3988a2c41972801a"
+            ]
+        ]
+    },
+    {
+        "id": "6de435dc3c976c28",
+        "type": "function",
+        "z": "coffee_tab",
+        "name": "Event Log",
+        "func": "const MAX_LOGS = 100;\n\nlet obj = msg.payload;\nif (typeof obj === \"string\") {\n    try {\n        obj = JSON.parse(obj);\n    } catch {\n        obj = { raw: msg.payload };\n    }\n}\n\nconst entry = {\n    time: new Date().toLocaleString(),\n    topic: msg.topic,\n    data: obj\n};\n\nlet logs = flow.get(\"coffeeLogs\") || [];\n\nlogs.push(entry);\nif (logs.length > MAX_LOGS) {\n    logs.shift();\n}\n\nflow.set(\"coffeeLogs\", logs);\nmsg.payload = logs;\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 200,
+        "y": 340,
+        "wires": [
+            [
+                "144f867af8592a08"
+            ]
+        ]
+    },
+    {
+        "id": "144f867af8592a08",
+        "type": "ui_template",
+        "z": "coffee_tab",
+        "group": "56adc1925d44b3d8",
+        "name": "",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "format": "<div style=\"height:400px; overflow-y:auto; font-family: monospace; font-size:12px;\">\n    <div ng-repeat=\"l in msg.payload track by $index\">\n        <pre>{{l.time}} | {{l.topic}}\n{{l.data | json}}\n------------------------------------</pre>\n    </div>\n</div>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 420,
+        "y": 400,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "mqtt_broker",
+        "type": "mqtt-broker",
+        "name": "mqtt server",
+        "broker": "5f479f2b79404567899d28e682008d15.s1.eu.hivemq.cloud",
+        "port": "8883",
+        "tls": "",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": true,
+        "protocolVersion": 4,
+        "keepalive": 60,
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "ui_auth",
+        "type": "ui_group",
+        "name": "Auth Events",
+        "tab": "ui_tab_cmd",
+        "order": 1,
+        "width": 6
+    },
+    {
+        "id": "ui_dispense",
+        "type": "ui_group",
+        "name": "Dispensing Events",
+        "tab": "ui_tab_cmd",
+        "order": 2,
+        "width": 6
+    },
+    {
+        "id": "ui_refill",
+        "type": "ui_group",
+        "name": "Refilling Events",
+        "tab": "ui_tab_cmd",
+        "order": 3,
+        "width": 6
+    },
+    {
+        "id": "ui_status",
+        "type": "ui_group",
+        "name": "Status & Alerts",
+        "tab": "ui_tab_cmd",
+        "order": 4,
+        "width": 6
+    },
+    {
+        "id": "56adc1925d44b3d8",
+        "type": "ui_group",
+        "name": "Logs",
+        "tab": "ui_tab_cmd",
+        "order": 5,
+        "disp": true,
+        "width": "12",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "ui_tab_cmd",
+        "type": "ui_tab",
+        "name": "Command Centre",
+        "icon": "dashboard"
+    },
+    {
+        "id": "4c759311b4d83428",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-dashboard": "3.6.6"
+        }
+    }
+]
