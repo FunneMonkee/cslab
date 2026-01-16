@@ -374,7 +374,6 @@ void MoveServoTask(void* parameter) {
           char bufferJson[256];
           serializeJson(doc, bufferJson);
           publishMessage(coffeeDispensingCompletedEsp, bufferJson);
-          servo.write(180);
           servo.write(0);
           delay(250);
           isDispensing = false;
@@ -389,6 +388,7 @@ void MoveServoTask(void* parameter) {
             doc = generateWarningJson(Event::DISPENSE_CANCELED, emptyArray);
             Serial.println("dispense canceled");
             isDispensing = false;
+            servo.write(0);
           } else if (hasTimedOut) {
             doc = generateCriticalJson(Event::TIMEOUT);
             Serial.println("dispense timeout");
@@ -398,8 +398,6 @@ void MoveServoTask(void* parameter) {
           publishMessage(coffeeDispensingFailedEsp, bufferJson);
           Serial.println("dispense failed");
           xSemaphoreGive(logoutTaskSem);
-          //simulate turn off
-          delay(9999999);
         }
       } else {
         alertStock();
@@ -476,8 +474,6 @@ void MoveRefillServoTask(void* parameter) {
           publishMessage(coffeeRefillingFailedEsp, bufferJson);
           Serial.println("refill failed");
           xSemaphoreGive(logoutTaskSem);
-          //simulate turn off
-          delay(9999999);
         }
       } else {
         alertFullStock();
@@ -562,7 +558,7 @@ void setup() {
   mqttClient.setInsecure();
   client.setServer(mqtt_server, mqtt_port);
   client.setCallback(callback);
-  configTime(gmtOffset_sec, daylightOffset_sec, "pool.ntp.org", "time.nist.gov");
+  configTime(gmtOffset_sec, daylightOffset_sec, "pool.ntp.org");
   servo.setPeriodHertz(50);
   servo.attach(23);
   pinMode(dropSensor1, INPUT);
